@@ -2,6 +2,12 @@
 
 A new Flutter project.
 
+
+## Running:
+    flutter run --no-sound-null-safety
+
+- [FILMOTECA FIGMA PROTOTYPE](https://www.figma.com/file/ao3RfDqFhMrIv45EfYsx2t/Filmoteca?node-id=30%3A46&t=bFIEFjeC9GvvKONY-1)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
