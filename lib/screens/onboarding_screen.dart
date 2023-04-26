@@ -111,7 +111,10 @@ class OnboardingScreen extends StatelessWidget {
                                     ],
                                   ),
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushReplacementNamed(
+                                          context, '/welcome');
+                                    },
                                     child: const Text(
                                       'Continuar',
                                       style: TextStyle(
