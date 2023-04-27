@@ -69,13 +69,15 @@ class OnboardingScreen extends StatelessWidget {
                         Text(
                           titles[index],
                           style: const TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            fontSize: 28,
+                              fontFamily: 'RobotoSlab',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                             decoration: TextDecoration.none
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 12),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 32),
                           child: Text(
