@@ -62,9 +62,9 @@ class OnboardingScreen extends StatelessWidget {
                 itemCount: images.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
+                    margin: EdgeInsets.only(top:30),
                     child: Column(
-                      
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
                           titles[index],
@@ -77,7 +77,7 @@ class OnboardingScreen extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 32),
                           child: Text(
@@ -89,13 +89,17 @@ class OnboardingScreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
+                        const SizedBox(height: 120),
+
                         if (index == 2)
-                          Column(
+                          Container(
+                            margin: EdgeInsets.only(top: 0),
+                            child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    bottom: 67.0, left: 33.0),
+                                    bottom: 67.0, left: 25.0),
                                 child: Container(
                                   height: 50.0,
                                   width: 325.0,
@@ -116,7 +120,10 @@ class OnboardingScreen extends StatelessWidget {
                                     ],
                                   ),
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                       Navigator.pushReplacementNamed(
+                                          context, '/welcome');
+                                    },
                                     child: const Text(
                                       'Continuar',
                                       style: TextStyle(
@@ -130,9 +137,12 @@ class OnboardingScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                      ],
+                          
+                          )
+                           ],
                     ),
-                  );
+                  
+                    );
                 },
                 pagination: const SwiperPagination(),
                 //control: SwiperControl(),
