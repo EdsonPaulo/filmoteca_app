@@ -24,6 +24,12 @@ class WelcomeScreen extends StatelessWidget {
               },
               child: const Text('Cadastro'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              },
+              child: const Text('Início'),
+            ),
           ],
         ),
       ),
