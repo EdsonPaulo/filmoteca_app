@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:filmoteca_app/data/category_data.dart';
 import 'package:filmoteca_app/models/category_model.dart';
 import 'package:filmoteca_app/widgets/custom_appbar.dart';
 import 'package:filmoteca_app/constants/app_colors.dart';
+import 'package:flutter/material.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
@@ -12,7 +12,15 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
-  List<CategoryModel> categories = getCategories();
+  List<CategoryModel> _categories = [];
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _categories = getCategories();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +37,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               child: const Text(
                 'Categorias',
                 style: TextStyle(
+                  fontSize: 36,
                   color: AppColors.primaryColor,
-                  fontSize: 38,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ),
             Expanded(
               child: GridView.builder(
-                itemCount: categories.length,
+                itemCount: _categories.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 8,
@@ -53,7 +61,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     onTap: () {
                       Navigator.of(context).pushNamed(
                         '/category_movies',
-                        arguments: categories[index],
+                        arguments: _categories[index],
                       );
                     },
                     child: Container(
@@ -62,7 +70,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         color: AppColors.secondaryDarkColor,
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: NetworkImage(categories[index].imageUrl),
+                          image: NetworkImage(_categories[index].imageUrl),
                           fit: BoxFit.cover,
                           colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.5),
@@ -72,7 +80,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          '${categories[index].name[0].toUpperCase()}${categories[index].name.substring(1)}',
+                          '${_categories[index].name[0].toUpperCase()}${_categories[index].name.substring(1)}',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 24,
