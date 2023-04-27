@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:filmoteca_app/screens/welcome_screen.dart';
+
 
 class OnboardingScreen extends StatelessWidget {
   final String image = 'assets/images/onboarding_bg.png';
@@ -61,6 +63,7 @@ class OnboardingScreen extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     child: Column(
+                      
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
@@ -78,7 +81,7 @@ class OnboardingScreen extends StatelessWidget {
                           child: Text(
                             descriptions[index],
                             style: const TextStyle(
-                              fontSize: 18,
+                              fontSize: 20,
                               color: Colors.white,
                             ),
                             textAlign: TextAlign.center,
@@ -111,7 +114,13 @@ class OnboardingScreen extends StatelessWidget {
                                     ],
                                   ),
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                       Navigator.pushReplacement(context,
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) => const WelcomeScreen(),
+                                          ),
+                                        );
+                                    },
                                     child: const Text(
                                       'Continuar',
                                       style: TextStyle(
