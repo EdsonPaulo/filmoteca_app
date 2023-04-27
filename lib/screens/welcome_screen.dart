@@ -1,6 +1,5 @@
+import 'package:filmoteca_app/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-
-import '../constants/app_colors.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -65,7 +64,7 @@ class WelcomeScreen extends StatelessWidget {
                       325.0, 50.0), // Define o tamanho mínimo do botão
                 ),
                 child: const Text(
-                  'Login',
+                  'Entrar',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -92,7 +91,7 @@ class WelcomeScreen extends StatelessWidget {
                       325.0, 50.0), // Define o tamanho mínimo do botão
                 ),
                 child: const Text(
-                  'Cadastro',
+                  'Criar Conta',
                   style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 18.0,
