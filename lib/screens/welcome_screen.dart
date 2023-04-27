@@ -16,98 +16,77 @@ class WelcomeScreen extends StatelessWidget {
             image: DecorationImage(
               image: AssetImage(image),
               fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color.fromRGBO(0, 237, 123, 0.00),
-                Color.fromRGBO(3, 103, 55, 0.28),
-                Color.fromRGBO(1, 1, 1, 0.76),
-              ],
-              stops: [
-                0.0,
-                0.01,
-                0.0002,
-              ],
+              colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.6),
+                BlendMode.srcATop,
+              ),
             ),
           ),
         ),
         Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Image.asset('assets/images/logoA.png'),
-          const SizedBox(height: 150)
+          const SizedBox(height: 100),
+          Image.asset('assets/images/logo_a.png'),
+          const SizedBox(height: 100),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 4.0,
+                    backgroundColor: AppColors.primaryColor,
+                    shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
+                    minimumSize: const Size(325.0, 50.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                  ),
+                  child: const Text(
+                    'Entrar',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/register');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 4.0,
+                    backgroundColor: Colors.white,
+                    shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
+                    minimumSize: const Size(325.0, 50.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                  ),
+                  child: const Text(
+                    'Criar Conta',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: AppColors.primaryColor,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
+                  child: const Text('Início'),
+                ),
+              ],
+            ),
+          )
         ]),
-        Container(
-          margin: const EdgeInsets.only(top: 500, left: 32),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(
-                      0xff59d75f), // Define a cor de fundo do botão como #59D75F
-                  elevation: 4.0, // Define a elevação do box-shadow
-                  shadowColor: const Color.fromRGBO(
-                      0, 0, 0, 0.25), // Define a cor do box-shadow
-                  shape: RoundedRectangleBorder(
-                    // Define o border-radius
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                  minimumSize: const Size(
-                      325.0, 50.0), // Define o tamanho mínimo do botão
-                ),
-                child: const Text(
-                  'Entrar',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/register');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 255, 255,
-                      255), // Define a cor de fundo do botão como #59D75F
-                  elevation: 4.0, // Define a elevação do box-shadow
-                  shadowColor: const Color.fromRGBO(
-                      0, 0, 0, 0.25), // Define a cor do box-shadow
-                  shape: RoundedRectangleBorder(
-                    // Define o border-radius
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                  minimumSize: const Size(
-                      325.0, 50.0), // Define o tamanho mínimo do botão
-                ),
-                child: const Text(
-                  'Criar Conta',
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home');
-                },
-                child: const Text('Início'),
-              ),
-            ],
-          ),
-        )
       ]),
     );
   }

@@ -1,24 +1,26 @@
+import 'package:filmoteca_app/constants/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-class OnboardingScreen extends StatelessWidget {
-  OnboardingScreen({super.key});
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
 
-  final String image = 'assets/images/onboarding_bg.png';
+  @override
+  _OnboardingScreenState createState() => _OnboardingScreenState();
+}
 
-  List<String> images = [
-    'assets/images/onboarding_bg.png',
-    'assets/images/onboarding_bg.png',
-    'assets/images/onboarding_bg.png',
-  ];
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final SwiperController _swiperController = SwiperController();
+  int _currentIndex = 0;
 
-  final List<String> titles = [
+  final List<String> _titles = [
     'Bem-Vindo à Filmoteca',
     'Organize seus filmes favoritos',
     'Compartilhe suas avaliações'
   ];
 
-  final List<String> descriptions = [
+  final List<String> _descriptions = [
     'O melhor aplicativo de catalogação e avaliação de filmes',
     'Adicione seus filmes favoritos e crie listas personalizadas',
     'Compartilhe sua opinião com amigos e descubra novos filmes'
@@ -30,9 +32,9 @@ class OnboardingScreen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(image),
+                image: AssetImage('assets/images/onboarding_bg.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -59,17 +61,25 @@ class OnboardingScreen extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Swiper(
-                itemCount: images.length,
+                onIndexChanged: (value) {
+                  setState(() {
+                    _currentIndex = value;
+                  });
+                },
+                itemCount: _titles.length,
+                loop: false,
+                controller: _swiperController,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                    margin: const EdgeInsets.only(top: 30),
+                    margin:
+                        const EdgeInsets.only(bottom: 100, left: 20, right: 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          titles[index],
+                          _titles[index],
                           style: const TextStyle(
-                              fontSize: 28,
+                              fontSize: 26,
                               fontFamily: 'RobotoSlab',
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -77,73 +87,66 @@ class OnboardingScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 32),
-                          child: Text(
-                            descriptions[index],
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
-                            textAlign: TextAlign.center,
+                        Text(
+                          _descriptions[index],
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
                           ),
+                          textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 120),
-                        if (index == 2)
-                          Container(
-                            margin: const EdgeInsets.only(top: 0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: 67.0, left: 25.0),
-                                  child: Container(
-                                    height: 50.0,
-                                    width: 325.0,
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFF59D75F),
-                                      borderRadius: BorderRadius.circular(50.0),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Color.fromRGBO(0, 0, 0, 0.25),
-                                          offset: Offset(0, 4),
-                                          blurRadius: 4.0,
-                                        ),
-                                        BoxShadow(
-                                          color: Color.fromRGBO(0, 0, 0, 0.25),
-                                          offset: Offset(0, 4),
-                                          blurRadius: 4.0,
-                                        ),
-                                      ],
-                                    ),
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pushReplacementNamed(
-                                            context, '/welcome');
-                                      },
-                                      child: const Text(
-                                        'Continuar',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
                       ],
                     ),
                   );
                 },
-                pagination: const SwiperPagination(),
+                pagination:
+                    const SwiperPagination(margin: EdgeInsets.only(bottom: 50)),
                 //control: SwiperControl(),
               ),
             ),
+            Padding(
+                padding: const EdgeInsets.only(bottom: 50),
+                child: _currentIndex == 2
+                    ? ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/welcome');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          elevation: 4.0,
+                          backgroundColor: AppColors.primaryColor,
+                          shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
+                          minimumSize: const Size(325.0, 50.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                        ),
+                        child: const Text(
+                          'Continuar',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      )
+                    : ElevatedButton(
+                        onPressed: () {
+                          _swiperController.next();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          elevation: 4.0,
+                          backgroundColor: AppColors.primaryColor,
+                          shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
+                          minimumSize: const Size(50, 50.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                        ),
+                        child: const Icon(
+                          CupertinoIcons.arrow_right,
+                          color: Colors.white,
+                        ),
+                      )),
           ]),
         ],
       ),
