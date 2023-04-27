@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:filmoteca_app/screens/welcome_screen.dart';
+
 
 class OnboardingScreen extends StatelessWidget {
   final String image = 'assets/images/onboarding_bg.png';
@@ -60,15 +62,18 @@ class OnboardingScreen extends StatelessWidget {
                 itemCount: images.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
+                    margin: EdgeInsets.only(top:30),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
                           titles[index],
                           style: const TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            fontSize: 28,
+                              fontFamily: 'RobotoSlab',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                             decoration: TextDecoration.none
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -78,19 +83,23 @@ class OnboardingScreen extends StatelessWidget {
                           child: Text(
                             descriptions[index],
                             style: const TextStyle(
-                              fontSize: 18,
+                              fontSize: 20,
                               color: Colors.white,
                             ),
                             textAlign: TextAlign.center,
                           ),
                         ),
+                        const SizedBox(height: 120),
+
                         if (index == 2)
-                          Column(
+                          Container(
+                            margin: EdgeInsets.only(top: 0),
+                            child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    bottom: 67.0, left: 33.0),
+                                    bottom: 67.0, left: 25.0),
                                 child: Container(
                                   height: 50.0,
                                   width: 325.0,
@@ -112,7 +121,7 @@ class OnboardingScreen extends StatelessWidget {
                                   ),
                                   child: TextButton(
                                     onPressed: () {
-                                      Navigator.pushReplacementNamed(
+                                       Navigator.pushReplacementNamed(
                                           context, '/welcome');
                                     },
                                     child: const Text(
@@ -128,9 +137,12 @@ class OnboardingScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                      ],
+                          
+                          )
+                           ],
                     ),
-                  );
+                  
+                    );
                 },
                 pagination: const SwiperPagination(),
                 //control: SwiperControl(),
