@@ -2,14 +2,14 @@ import 'package:filmoteca_app/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:filmoteca_app/constants/app_colors.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ExploreScreen extends StatefulWidget {
+  const ExploreScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _ExploreScreenState createState() => _ExploreScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Container(
               child: const Text(
-                'TELA INICIAL',
+                'EXPLORAR',
                 style: TextStyle(color: AppColors.primaryColor),
               ),
             )

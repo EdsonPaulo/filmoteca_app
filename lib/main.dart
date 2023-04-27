@@ -1,4 +1,9 @@
+import 'package:filmoteca_app/models/category_model.dart';
 import 'package:filmoteca_app/screens/categories_screen.dart';
+import 'package:filmoteca_app/screens/category_movies_Screen.dart';
+import 'package:filmoteca_app/screens/explore_screen.dart';
+import 'package:filmoteca_app/screens/favorites_screen.dart';
+import 'package:filmoteca_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,9 +46,24 @@ class MyApp extends StatelessWidget {
         '/home': (context) => ChangeNotifierProvider(
               create: (context) => NavigationModel(),
               child: const MainTabsScreen(
-                children: [HomeScreen(), CategoriesScreen()],
+                children: [
+                  HomeScreen(),
+                  CategoriesScreen(),
+                  ExploreScreen(),
+                  FavoritesScreen(),
+                  ProfileScreen()
+                ],
               ),
             )
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/category_movies') {
+          final CategoryModel category = settings.arguments as CategoryModel;
+          return MaterialPageRoute(
+            builder: (context) => CategoryMoviesScreen(category: category),
+          );
+        }
+        return null;
       },
     );
   }
