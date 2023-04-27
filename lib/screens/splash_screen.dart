@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: AppColors.primaryDarkColor,
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Image.asset('assets/images/logoA.png'),
+        Image.asset('assets/images/logo_a.png'),
         const SizedBox(height: 100),
         const CupertinoActivityIndicator(color: Colors.lightGreen)
       ])),

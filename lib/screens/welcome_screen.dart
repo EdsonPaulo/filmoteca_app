@@ -100,6 +100,12 @@ class WelcomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.w900,
               ),),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              },
+              child: const Text('Início'),
+            ),
           ],
         ),
           )
