@@ -3,7 +3,7 @@ import 'package:filmoteca_app/models/category_model.dart';
 import 'package:filmoteca_app/utils/string_helpers.dart';
 import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:filmoteca_app/constants/app_colors.dart';
+import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Container(
                                     width: double.infinity,
                                     padding: const EdgeInsets.only(
-                                        left: 25, bottom: 25),
+                                        left: 20, bottom: 15, top: 15),
                                     decoration: const BoxDecoration(
                                       borderRadius: BorderRadius.only(
                                           bottomLeft: Radius.circular(20),
@@ -111,12 +111,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
-                                          Color.fromRGBO(0, 0, 0, 0.3),
-                                          Color.fromRGBO(0, 0, 0, 0.7),
+                                          Color.fromRGBO(0, 0, 0, 0.1),
+                                          Color.fromRGBO(0, 0, 0, 0.6),
+                                          Color.fromRGBO(0, 0, 0, 0.8),
                                         ],
                                         stops: [
                                           0.0,
-                                          0.6,
+                                          0.4,
+                                          0.8,
                                         ],
                                       ),
                                     ),
