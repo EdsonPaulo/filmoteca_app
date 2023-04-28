@@ -1,4 +1,4 @@
-import 'package:filmoteca_app/utils/app_colors.dart';
+import 'package:filmoteca_app/widgets/shared/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -32,51 +32,18 @@ class WelcomeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/login');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 4.0,
-                    backgroundColor: AppColors.primaryColor,
-                    shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
-                    minimumSize: const Size(325.0, 50.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                  ),
-                  child: const Text(
-                    'Entrar',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
+                CustomButton(
+                    label: 'Entrar',
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/login');
+                    }),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/register');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 4.0,
-                    backgroundColor: Colors.white,
-                    shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
-                    minimumSize: const Size(325.0, 50.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                  ),
-                  child: const Text(
-                    'Criar Conta',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
+                CustomButton(
+                    label: 'Criar Conta',
+                    variant: ButtonVariantType.secondary,
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/register');
+                    }),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/home');
