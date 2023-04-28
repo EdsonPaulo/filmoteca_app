@@ -26,15 +26,6 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               IconButton(
                 icon: const Icon(
-                  CupertinoIcons.search,
-                  color: AppColors.primaryColor,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/explore');
-                },
-              ),
-              IconButton(
-                icon: const Icon(
                   CupertinoIcons.bell,
                   color: AppColors.primaryColor,
                 ),
