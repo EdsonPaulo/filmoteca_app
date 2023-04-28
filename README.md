@@ -2,13 +2,16 @@
 
 Movie Catalog & Rate/Review App.
 
-## Running:
-> flutter packages get
-
-> flutter run --no-sound-null-safety
-
-
 - [FILMOTECA FIGMA PROTOTYPE](https://www.figma.com/file/ao3RfDqFhMrIv45EfYsx2t/Filmoteca?node-id=30%3A46&t=bFIEFjeC9GvvKONY-1)
+<br />
+
+## Running:
+
+```
+ flutter packages get
+
+ flutter run --no-sound-null-safety
+```
 
 
 ## Folders Structure (/lib directory)
@@ -22,6 +25,7 @@ Movie Catalog & Rate/Review App.
 - **utils**: to store utility functions and constants that are used throughout the application.
 - **data**: to store static data objects for testing purposes.
 
+<br />
 
 ### Getting Started with Flutter
 
