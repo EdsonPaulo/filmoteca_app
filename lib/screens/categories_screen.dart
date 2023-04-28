@@ -1,6 +1,7 @@
 import 'package:filmoteca_app/data/category_data.dart';
 import 'package:filmoteca_app/models/category_model.dart';
-import 'package:filmoteca_app/widgets/custom_appbar.dart';
+import 'package:filmoteca_app/utils/string_helpers.dart';
+import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
 import 'package:filmoteca_app/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       backgroundColor: AppColors.primaryDarkColor,
       appBar: const CustomHomeAppBar(),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             Container(
@@ -51,7 +52,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8,
                   childAspectRatio: MediaQuery.of(context).size.width /
-                      (80 * MediaQuery.of(context).devicePixelRatio),
+                      (70 * MediaQuery.of(context).devicePixelRatio),
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
@@ -80,7 +81,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          '${_categories[index].name[0].toUpperCase()}${_categories[index].name.substring(1)}',
+                          capitalizeText(_categories[index].name),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 24,
