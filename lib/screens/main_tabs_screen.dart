@@ -1,4 +1,4 @@
-import 'package:filmoteca_app/constants/app_colors.dart';
+import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/utils/navigation_model.dart';
 
 import 'package:flutter/cupertino.dart';

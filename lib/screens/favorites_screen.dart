@@ -1,6 +1,6 @@
 import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:filmoteca_app/constants/app_colors.dart';
+import 'package:filmoteca_app/utils/app_colors.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});

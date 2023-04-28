@@ -5,6 +5,7 @@ import 'package:filmoteca_app/screens/explore_screen.dart';
 import 'package:filmoteca_app/screens/favorites_screen.dart';
 import 'package:filmoteca_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'package:filmoteca_app/screens/onboarding_screen.dart';
@@ -30,41 +31,44 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Filmoteca',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        fontFamily: 'RobotoSlab',
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light, // status bar wiht light style
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Filmoteca',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          fontFamily: 'RobotoSlab',
+        ),
+        home: const SplashScreen(),
+        routes: {
+          '/onboarding': (context) => const OnboardingScreen(),
+          '/welcome': (context) => const WelcomeScreen(),
+          '/login': (context) => const LoginScreen(),
+          '/register': (context) => const RegisterScreen(),
+          '/home': (context) => ChangeNotifierProvider(
+                create: (context) => NavigationModel(),
+                child: const MainTabsScreen(
+                  children: [
+                    HomeScreen(),
+                    CategoriesScreen(),
+                    ExploreScreen(),
+                    FavoritesScreen(),
+                    ProfileScreen()
+                  ],
+                ),
+              )
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == '/category_movies') {
+            final CategoryModel category = settings.arguments as CategoryModel;
+            return MaterialPageRoute(
+              builder: (context) => CategoryMoviesScreen(category: category),
+            );
+          }
+          return null;
+        },
       ),
-      home: const SplashScreen(),
-      routes: {
-        '/onboarding': (context) => OnboardingScreen(),
-        '/welcome': (context) => const WelcomeScreen(),
-        '/login': (context) => const LoginScreen(),
-        '/register': (context) => const RegisterScreen(),
-        '/home': (context) => ChangeNotifierProvider(
-              create: (context) => NavigationModel(),
-              child: const MainTabsScreen(
-                children: [
-                  HomeScreen(),
-                  CategoriesScreen(),
-                  ExploreScreen(),
-                  FavoritesScreen(),
-                  ProfileScreen()
-                ],
-              ),
-            )
-      },
-      onGenerateRoute: (settings) {
-        if (settings.name == '/category_movies') {
-          final CategoryModel category = settings.arguments as CategoryModel;
-          return MaterialPageRoute(
-            builder: (context) => CategoryMoviesScreen(category: category),
-          );
-        }
-        return null;
-      },
     );
   }
 }

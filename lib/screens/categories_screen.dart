@@ -2,7 +2,7 @@ import 'package:filmoteca_app/data/category_data.dart';
 import 'package:filmoteca_app/models/category_model.dart';
 import 'package:filmoteca_app/utils/string_helpers.dart';
 import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
-import 'package:filmoteca_app/constants/app_colors.dart';
+import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesScreen extends StatefulWidget {
