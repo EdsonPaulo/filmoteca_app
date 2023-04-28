@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.primaryDarkColor,
+        backgroundColor: AppColors.darkPrimaryColor,
         appBar: const CustomHomeAppBar(),
         body: Container(
           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: index == _selectedCategoryIndex
                                   ? AppColors.primaryColor
-                                  : AppColors.secondaryDarkColor,
+                                  : AppColors.darkSecondaryColor,
                               minimumSize: const Size(70, 35.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Container(
                             height: 180,
                             decoration: BoxDecoration(
-                              color: AppColors.secondaryDarkColor,
+                              color: AppColors.darkSecondaryColor,
                               borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
                                 image: const NetworkImage(

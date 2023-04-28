@@ -26,7 +26,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryDarkColor,
+      backgroundColor: AppColors.darkPrimaryColor,
       appBar: const CustomHomeAppBar(),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -68,7 +68,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     child: Container(
                       margin: const EdgeInsets.all(4.0),
                       decoration: BoxDecoration(
-                        color: AppColors.secondaryDarkColor,
+                        color: AppColors.darkSecondaryColor,
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
                           image: NetworkImage(_categories[index].imageUrl),

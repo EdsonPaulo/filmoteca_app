@@ -22,7 +22,7 @@ class MainTabsScreen extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-            color: AppColors.secondaryDarkColor,
+            color: AppColors.darkSecondaryColor,
             boxShadow: [
               BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
             ]),

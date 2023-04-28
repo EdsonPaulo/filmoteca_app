@@ -13,7 +13,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryDarkColor,
+      backgroundColor: AppColors.darkPrimaryColor,
       appBar: const CustomHomeAppBar(),
       body: Container(
         padding: const EdgeInsets.all(16),

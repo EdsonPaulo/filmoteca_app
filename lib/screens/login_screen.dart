@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: const Color(0xFF181A1F),
         iconTheme: const IconThemeData(color: AppColors.primaryColor),
       ),
-      backgroundColor: AppColors.primaryDarkColor,
+      backgroundColor: AppColors.darkPrimaryColor,
       body: Stack(children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.center,

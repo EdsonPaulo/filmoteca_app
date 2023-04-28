@@ -13,7 +13,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryDarkColor,
+      backgroundColor: AppColors.darkPrimaryColor,
       appBar: const CustomHomeAppBar(),
       body: Container(
         padding: const EdgeInsets.all(16),

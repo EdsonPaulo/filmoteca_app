@@ -15,13 +15,13 @@ class _CategoryMoviesScreenState extends State<CategoryMoviesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryDarkColor,
+      backgroundColor: AppColors.darkPrimaryColor,
       appBar: AppBar(
           toolbarHeight: 80,
           elevation: 0,
           foregroundColor: AppColors.primaryColor,
           title: Text(widget.category.name.toUpperCase()),
-          backgroundColor: AppColors.primaryDarkColor),
+          backgroundColor: AppColors.darkPrimaryColor),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
