@@ -1,4 +1,5 @@
 import 'package:filmoteca_app/utils/app_colors.dart';
+import 'package:filmoteca_app/widgets/shared/custom_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -16,8 +17,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<String> _titles = [
     'Bem-Vindo à Filmoteca',
-    'Organize seus filmes favoritos',
-    'Compartilhe suas avaliações'
+    'Organize seus Filmes Favoritos',
+    'Avalie os Melhores Filmes'
   ];
 
   final List<String> _descriptions = [
@@ -107,27 +108,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Padding(
                 padding: const EdgeInsets.only(bottom: 50),
                 child: _currentIndex == 2
-                    ? ElevatedButton(
+                    ? CustomButton(
+                        label: 'Continuar',
                         onPressed: () {
                           Navigator.pushNamed(context, '/welcome');
                         },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 4.0,
-                          backgroundColor: AppColors.primaryColor,
-                          shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
-                          minimumSize: const Size(325.0, 50.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                        ),
-                        child: const Text(
-                          'Continuar',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
                       )
                     : ElevatedButton(
                         onPressed: () {
