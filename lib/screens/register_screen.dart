@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
 import '../widgets/shared/custom_button.dart';
+import '../widgets/shared/custom_textfield.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -11,6 +13,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  String _email = '';
+  String _password = '';
+  String _name = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,149 +41,72 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             const SizedBox(height: 30),
-            Center(
-              child: Column(
-                children: [
-                  // Adicione seus campos de nome, e-mail e senha aqui
-
-                  SizedBox(
-                    width: 325,
-                    height: 50,
-                    child: TextField(
-                      style: const TextStyle(color: Color(0xFFC4C4C4)),
-                      decoration: InputDecoration(
-                        hintText: 'Nome e Sobrenome',
-                        hintStyle: const TextStyle(color: Color(0xFFC4C4C4)),
-                        prefixIcon: const Icon(Icons.email_outlined,
-                            color: Color(0xFFC4C4C4)),
-                        contentPadding: EdgeInsets.zero,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: const Color(0xFF2A2D38),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  SizedBox(
-                    width: 325,
-                    height: 50,
-                    child: TextField(
-                      style: const TextStyle(color: Color(0xFFC4C4C4)),
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        hintStyle: const TextStyle(color: Color(0xFFC4C4C4)),
-                        prefixIcon: const Icon(Icons.email_outlined,
-                            color: Color(0xFFC4C4C4)),
-                        contentPadding: EdgeInsets.zero,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: const Color(0xFF2A2D38),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  SizedBox(
-                    width: 325,
-                    height: 50,
-                    child: TextField(
-                      style: const TextStyle(color: Color(0xFFC4C4C4)),
-                      decoration: InputDecoration(
-                        hintText: 'Palavra-passe',
-                        hintStyle: const TextStyle(color: Color(0xFFC4C4C4)),
-                        prefixIcon: const Icon(Icons.lock_outline,
-                            color: Color(0xFFC4C4C4)),
-                        suffixIcon: IconButton(
-                          icon: const Icon(
-                            Icons.visibility_off_outlined,
-                            color: Color(0xFFC4C4C4),
-                          ),
-                          onPressed: () {},
-                        ),
-                        contentPadding: EdgeInsets.zero,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: const Color(0xFF2A2D38),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  SizedBox(
-                    width: 325,
-                    height: 50,
-                    child: TextField(
-                      style: const TextStyle(color: Color(0xFFC4C4C4)),
-                      decoration: InputDecoration(
-                        hintText: 'Confirmar Palavra-passe',
-                        hintStyle: const TextStyle(color: Color(0xFFC4C4C4)),
-                        prefixIcon: const Icon(Icons.lock_outline,
-                            color: Color(0xFFC4C4C4)),
-                        suffixIcon: IconButton(
-                          icon: const Icon(
-                            Icons.visibility_outlined,
-                            color: Color(0xFFC4C4C4),
-                          ),
-                          onPressed: () {},
-                        ),
-                        contentPadding: EdgeInsets.zero,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: const Color(0xFF2A2D38),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  CustomButton(
-                      label: 'Criar Conta',
-                      onPressed: () {
-                        //Navigator.pushNamed(context, '/login');
-                      }),
-                  const SizedBox(height: 80),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Já tem uma Conta?  ',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(width: 5), // espaço entre os dois textos
-                      GestureDetector(
-                        child: const Text(
-                          'Iniciar Sessão',
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            decoration: TextDecoration.none,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        onTap: () {
-                          // função a ser executada quando o texto é tocado
-                          Navigator.pushNamed(context, '/login');
-                        },
-                      ),
-                    ],
-                  )
-                ],
-              ),
+            CustomTextField(
+              label: 'Nome e Sobrenome',
+              leftIcon: CupertinoIcons.mail,
+              onChangeText: (val) {
+                setState(() {
+                  _name = val;
+                });
+              },
             ),
-            const SizedBox(height: 80),
+            const SizedBox(height: 15),
+            CustomTextField(
+              label: 'Email',
+              leftIcon: CupertinoIcons.mail,
+              onChangeText: (val) {
+                setState(() {
+                  _email = val;
+                });
+              },
+            ),
+            const SizedBox(height: 15),
+            CustomTextField(
+              isPassword: true,
+              label: 'Palavra-Passe',
+              leftIcon: Icons.lock_outline,
+              onChangeText: (val) {
+                setState(() {
+                  _password = val;
+                });
+              },
+            ),
+            const SizedBox(height: 15),
+            CustomTextField(
+              isPassword: true,
+              label: 'Confirmar Palavra-passe',
+              leftIcon: Icons.lock_outline,
+              onChangeText: (val) {
+                setState(() {
+                  _password = val;
+                });
+              },
+            ),
+            const SizedBox(height: 20),
+            CustomButton(
+                label: 'Entrar',
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                }),
+            const SizedBox(height: 70),
+            GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Já tem uma Conta?  ',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    SizedBox(width: 5), // espaço entre os dois textos
+                    Text(
+                      'Iniciar Sessão',
+                      style: TextStyle(fontSize: 16, color: Colors.green),
+                    ),
+                  ],
+                )),
           ],
         ),
       ),
