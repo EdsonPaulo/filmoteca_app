@@ -19,7 +19,7 @@ List<MovieModel> getTrendMovies() {
       liked: false,
       images: [],
       cast: [],
-      categories: getCategories().sublist(0, 3),
+      categories: getCategories().sublist(0, 3).map((e) => e.name).toList(),
       reviews: [],
       trailers: []));
 
@@ -30,7 +30,7 @@ List<MovieModel> getTrendMovies() {
     posterImgUrl: 'https://loremflickr.com/322/242/movie,action',
     synopsis: 'Lorem ipsum odor merun.',
     rating: 9.5,
-    categories: getCategories().sublist(2, 3),
+    categories: getCategories().sublist(2, 3).map((e) => e.name).toList(),
   ));
 
   movies.add(MovieModel(
@@ -40,7 +40,7 @@ List<MovieModel> getTrendMovies() {
     posterImgUrl: 'https://loremflickr.com/333/343/movie,anime',
     synopsis: 'Lorem ipsum odor merun.',
     rating: 5.4,
-    categories: getCategories().sublist(0, 2),
+    categories: getCategories().sublist(0, 2).map((e) => e.name).toList(),
   ));
 
   movies.add(MovieModel(
@@ -50,7 +50,7 @@ List<MovieModel> getTrendMovies() {
     posterImgUrl: 'https://loremflickr.com/343/344/movie,nature',
     synopsis: 'Lorem ipsum odor merun.',
     rating: 8.7,
-    categories: getCategories().sublist(1, 3),
+    categories: getCategories().sublist(1, 3).map((e) => e.name).toList(),
   ));
 
   return movies;

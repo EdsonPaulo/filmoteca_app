@@ -1,5 +1,3 @@
-import 'package:filmoteca_app/models/category_model.dart';
-
 /// USER REVIEW
 class ReviewModel {
   int id;
@@ -46,7 +44,7 @@ class MovieModel {
   String posterImgUrl;
   bool liked; // if the current user liked this movie
   List<String> images;
-  List<CategoryModel> categories;
+  List<String> categories;
   List<ReviewModel> reviews;
   List<MovieCastModel> cast;
   List<MovieTrailerModel> trailers;
@@ -76,11 +74,35 @@ class MovieModel {
       synopsis: json['overview'],
       coverImgUrl: 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}',
       posterImgUrl: 'https://image.tmdb.org/t/p/w500${json['poster_path']}',
-      images: [], // Você precisará preencher este campo com base na resposta da API
-      categories: [], // Preencha este campo com base na resposta da API
-      reviews: [], // Preencha este campo com base na resposta da API
-      cast: [], // Preencha este campo com base na resposta da API
-      trailers: [], // Preencha este campo com base na resposta da API
+      images: [],
+      categories: (json['genre_ids'] as List<dynamic>)
+          .map((gId) => genres[gId]!)
+          .toList() as dynamic,
+      reviews: [],
+      cast: [],
+      trailers: [],
     );
   }
 }
+
+const genres = {
+  28: "Ação",
+  12: "Aventura",
+  16: "Animação",
+  35: "Comédia",
+  80: "Crime",
+  99: "Documentário",
+  18: "Drama",
+  10751: "Família",
+  14: "Fantasia",
+  36: "História",
+  27: "Terror",
+  10402: "Música",
+  9648: "Mistério",
+  10749: "Romance",
+  878: "Ficção científica",
+  10770: "Cinema TV",
+  53: "Thriller",
+  10752: "Guerra",
+  37: "Faroeste",
+};

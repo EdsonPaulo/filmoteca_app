@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/material.dart';
 
-const MAX_CARDS_NUMBER = 5;
+const int maxCardsNumber = 5;
 
 class TrendMoviesCarousel extends StatelessWidget {
   final Future<List<MovieModel>> futureMovies;
@@ -22,9 +22,10 @@ class TrendMoviesCarousel extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MovieModel> movies = (snapshot.data!);
+          movies.shuffle();
           return Swiper(
             itemHeight: 180,
-            itemCount: MAX_CARDS_NUMBER,
+            itemCount: maxCardsNumber,
             viewportFraction: 0.8,
             scale: 0.9,
             itemBuilder: (BuildContext context, int index) {
@@ -108,7 +109,7 @@ class TrendMoviesCarousel extends StatelessWidget {
                               movies[index]
                                   .categories
                                   .take(3)
-                                  .map((c) => capitalizeText(c.name))
+                                  .map((c) => capitalizeText(c))
                                   .join(', '),
                               style: const TextStyle(
                                   color: Colors.white,

@@ -76,7 +76,7 @@ class MovieCard extends StatelessWidget {
                         Text(
                           movie.categories
                               .take(2)
-                              .map((c) => capitalizeText(c.name))
+                              .map((c) => capitalizeText(c))
                               .join(', '),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
