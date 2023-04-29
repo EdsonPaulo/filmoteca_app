@@ -11,40 +11,35 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  bool _isObscure = true; // variável para controlar se o texto do TextField é visível ou não
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(
+      appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xFF181A1F),
         iconTheme: const IconThemeData(color: AppColors.primaryColor),
       ),
       backgroundColor: AppColors.darkPrimaryColor,
-
-      body: Center( child: 
-      Column(
+      body: Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/images/logo_b.png'),
             const SizedBox(height: 30),
-
             const Text(
-                'Criar Conta',
-                style: TextStyle(
-                  fontSize: 36,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                ),
+              'Criar Conta',
+              style: TextStyle(
+                fontSize: 34,
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
               ),
+            ),
             const SizedBox(height: 30),
-
-              Center(
+            Center(
               child: Column(
                 children: [
                   // Adicione seus campos de nome, e-mail e senha aqui
-            
+
                   SizedBox(
                     width: 325,
                     height: 50,
@@ -61,7 +56,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
-                        fillColor: Color(0xFF2A2D38),
+                        fillColor: const Color(0xFF2A2D38),
                       ),
                     ),
                   ),
@@ -82,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
-                        fillColor: Color(0xFF2A2D38),
+                        fillColor: const Color(0xFF2A2D38),
                       ),
                     ),
                   ),
@@ -92,24 +87,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 50,
                     child: TextField(
                       style: const TextStyle(color: Color(0xFFC4C4C4)),
-                      obscureText: _isObscure,
                       decoration: InputDecoration(
                         hintText: 'Palavra-passe',
                         hintStyle: const TextStyle(color: Color(0xFFC4C4C4)),
                         prefixIcon: const Icon(Icons.lock_outline,
                             color: Color(0xFFC4C4C4)),
                         suffixIcon: IconButton(
-                          icon: Icon(
-                            _isObscure
-                                ? Icons.visibility_off_outlined
-                                : Icons.visibility_outlined,
+                          icon: const Icon(
+                            Icons.visibility_off_outlined,
                             color: Color(0xFFC4C4C4),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _isObscure = !_isObscure; // inverte o valor de _isObscure ao pressionar o botão
-                            });
-                          },
+                          onPressed: () {},
                         ),
                         contentPadding: EdgeInsets.zero,
                         border: OutlineInputBorder(
@@ -117,34 +105,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
-                        fillColor: Color(0xFF2A2D38),
+                        fillColor: const Color(0xFF2A2D38),
                       ),
                     ),
                   ),
-                const SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   SizedBox(
                     width: 325,
                     height: 50,
                     child: TextField(
                       style: const TextStyle(color: Color(0xFFC4C4C4)),
-                      obscureText: _isObscure,
                       decoration: InputDecoration(
                         hintText: 'Confirmar Palavra-passe',
                         hintStyle: const TextStyle(color: Color(0xFFC4C4C4)),
                         prefixIcon: const Icon(Icons.lock_outline,
                             color: Color(0xFFC4C4C4)),
                         suffixIcon: IconButton(
-                          icon: Icon(
-                            _isObscure
-                                ? Icons.visibility_off_outlined
-                                : Icons.visibility_outlined,
+                          icon: const Icon(
+                            Icons.visibility_outlined,
                             color: Color(0xFFC4C4C4),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _isObscure = !_isObscure; // inverte o valor de _isObscure ao pressionar o botão
-                            });
-                          },
+                          onPressed: () {},
                         ),
                         contentPadding: EdgeInsets.zero,
                         border: OutlineInputBorder(
@@ -152,55 +133,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
-                        fillColor: Color(0xFF2A2D38),
+                        fillColor: const Color(0xFF2A2D38),
                       ),
                     ),
                   ),
-                
+                  const SizedBox(height: 30),
+                  CustomButton(
+                      label: 'Criar Conta',
+                      onPressed: () {
+                        //Navigator.pushNamed(context, '/login');
+                      }),
                   const SizedBox(height: 80),
 
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Já tem uma Conta?  ',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(width: 5), // espaço entre os dois textos
-                  GestureDetector(
-                    child: const Text(
-                      'Iniciar Sessão',
-                      style: TextStyle(
-                        color: AppColors.primaryColor,
-                        decoration: TextDecoration.none,
-                        fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Já tem uma Conta?  ',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    onTap: () {
-                      // função a ser executada quando o texto é tocado
-                      Navigator.pushNamed(context, '/login');
-                    },
-                  ),
+                      const SizedBox(width: 5), // espaço entre os dois textos
+                      GestureDetector(
+                        child: const Text(
+                          'Iniciar Sessão',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            decoration: TextDecoration.none,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        onTap: () {
+                          // função a ser executada quando o texto é tocado
+                          Navigator.pushNamed(context, '/login');
+                        },
+                      ),
+                    ],
+                  )
                 ],
-              )
-          
-
-                  ],
               ),
             ),
-
-            
-            const SizedBox(height: 20),
-            CustomButton(
-                label: 'Criar Conta',
-                onPressed: () {
-                  //Navigator.pushNamed(context, '/login');
-                }),
             const SizedBox(height: 80),
           ],
         ),
