@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final bool isObscure;
   final String label;
-  final Icon icon;
+  final IconData icon;
 
   const CustomTextField({
 
+    super.key,
     required this.isObscure,
     required this.label,
+    required this.icon,
 
 
   });
@@ -25,7 +27,7 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: label,
           hintStyle: const TextStyle(color: Color(0xFFC4C4C4)),
-          prefixIcon: const Icon(Icons.lock_outline,
+          prefixIcon: const Icon(icon,
               color: Color(0xFFC4C4C4)),
           
           contentPadding: EdgeInsets.zero,
