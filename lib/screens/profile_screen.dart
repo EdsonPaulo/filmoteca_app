@@ -160,6 +160,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 331,
                       child: ElevatedButton(
                         onPressed: () {
+                          Navigator.pushNamed(context, '/login');
                           // Adicione aqui o código que deve ser executado quando o botão for pressionado
                         },
                         style: ButtonStyle(
