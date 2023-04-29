@@ -39,6 +39,7 @@ dependencies:
   flutter_swiper: ^1.1.6
   google_nav_bar: ^5.0.6
   provider: ^6.0.5
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
