@@ -1,42 +1,64 @@
-import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
-
-class CustomTextField extends StatelessWidget {
-  final bool isObscure;
+class CustomTextField extends StatefulWidget {
   final String label;
-  final Icon icon;
+  final IconData? leftIcon;
+  final bool? isPassword;
+  final void Function(String) onChangeText;
 
   const CustomTextField({
-
-    required this.isObscure,
+    super.key,
     required this.label,
-
-
+    required this.onChangeText,
+    this.isPassword,
+    this.leftIcon,
   });
-  
+
   @override
-  Widget build(BuildContext context) {
-    return TextField(
+  _CustomTextFieldState createState() => _CustomTextFieldState();
+}
 
-      style: const TextStyle(color: Color(0xFFC4C4C4)),
+class _CustomTextFieldState extends State<CustomTextField> {
+  bool _showPassword = false;
 
-        obscureText: isObscure,
-        decoration: InputDecoration(
-          hintText: label,
-          hintStyle: const TextStyle(color: Color(0xFFC4C4C4)),
-          prefixIcon: const Icon(Icons.lock_outline,
-              color: Color(0xFFC4C4C4)),
-          
-          contentPadding: EdgeInsets.zero,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-          filled: true,
-          fillColor: Color(0xFF2A2D38),
-        ),             
-    );
+  @override
+  void initState() {
+    super.initState();
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 325,
+      height: 50,
+      child: TextField(
+          onChanged: widget.onChangeText,
+          obscureText: widget.isPassword == true && !_showPassword,
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            hintText: widget.label,
+            hintStyle: const TextStyle(color: Colors.white70),
+            contentPadding: EdgeInsets.zero,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            filled: true,
+            fillColor: const Color(0xFF2A2D38),
+            prefixIcon: Icon(widget.leftIcon, color: Colors.white70),
+            suffixIcon: widget.isPassword == true
+                ? IconButton(
+                    icon: Icon(
+                        color: Colors.white70,
+                        _showPassword
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined),
+                    onPressed: () {
+                      setState(() {
+                        _showPassword = !_showPassword;
+                      });
+                    })
+                : null,
+          )),
+    );
+  }
 }
