@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
             CustomButton(
                 label: 'Entrar',
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  //Navigator.pushNamed(context, '/login');
                 }),
             const SizedBox(height: 80),
 
