@@ -1,6 +1,6 @@
 # filmoteca_app
 
-Movie Catalog & Rate/Review App.
+A Movie Catalog & Rate/Review App.
 
 - [FILMOTECA FIGMA PROTOTYPE](https://www.figma.com/file/ao3RfDqFhMrIv45EfYsx2t/Filmoteca?node-id=30%3A46&t=bFIEFjeC9GvvKONY-1)
 <br />
