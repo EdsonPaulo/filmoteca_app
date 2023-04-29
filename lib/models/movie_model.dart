@@ -40,9 +40,10 @@ class MovieModel {
   int id;
   String title;
   double rating;
-  int duration; // in milliseconds
+  int duration; // in minutes
   String synopsis;
   String coverImgUrl;
+  String posterImgUrl;
   bool liked; // if the current user liked this movie
   List<String> images;
   List<CategoryModel> categories;
@@ -50,17 +51,36 @@ class MovieModel {
   List<MovieCastModel> cast;
   List<MovieTrailerModel> trailers;
 
-  MovieModel(
-      {required this.id,
-      required this.title,
-      required this.coverImgUrl,
-      required this.synopsis,
-      this.duration = 0,
-      this.rating = 0.0,
-      this.liked = false,
-      this.images = const [],
-      this.cast = const [],
-      this.categories = const [],
-      this.reviews = const [],
-      this.trailers = const []});
+  MovieModel({
+    required this.id,
+    required this.title,
+    required this.coverImgUrl,
+    required this.posterImgUrl,
+    required this.synopsis,
+    this.duration = 0,
+    this.rating = 0.0,
+    this.liked = false,
+    this.images = const [],
+    this.cast = const [],
+    this.categories = const [],
+    this.reviews = const [],
+    this.trailers = const [],
+  });
+
+  factory MovieModel.fromJson(Map<String, dynamic> json) {
+    return MovieModel(
+      id: json['id'],
+      title: json['title'],
+      rating: json['vote_average'].toDouble(),
+      duration: json['runtime'],
+      synopsis: json['overview'],
+      coverImgUrl: 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}',
+      posterImgUrl: 'https://image.tmdb.org/t/p/w500${json['poster_path']}',
+      images: [], // Você precisará preencher este campo com base na resposta da API
+      categories: [], // Preencha este campo com base na resposta da API
+      reviews: [], // Preencha este campo com base na resposta da API
+      cast: [], // Preencha este campo com base na resposta da API
+      trailers: [], // Preencha este campo com base na resposta da API
+    );
+  }
 }

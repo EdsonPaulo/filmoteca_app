@@ -32,7 +32,7 @@ class FilterHorizontalList extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           itemBuilder: ((context, index) => Container(
                 height: 35,
-                margin: const EdgeInsets.only(right: 6),
+                margin: const EdgeInsets.only(right: 8),
                 child: ElevatedButton(
                     onPressed: () {
                       onPressed(items[index], index);
