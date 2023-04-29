@@ -1,10 +1,12 @@
 import 'package:filmoteca_app/data/category_data.dart';
+import 'package:filmoteca_app/data/movies_data.dart';
 import 'package:filmoteca_app/models/category_model.dart';
-import 'package:filmoteca_app/utils/string_helpers.dart';
+import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/widgets/home/trend_movies_carousel.dart';
 import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
-import 'package:flutter/material.dart';
+import 'package:filmoteca_app/widgets/shared/filter_horizontal_list.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,7 +16,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<CategoryModel> _categories = getCategories();
+  List<CategoryModel> _categories = [];
+  List<MovieModel> _trendMovies = [];
+
   int _selectedCategoryIndex = 0;
 
   @override
@@ -22,13 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     setState(() {
-      _categories = getCategories();
+      _categories = [CategoryModel(id: -1, name: 'Tudo'), ...getCategories()];
+      _trendMovies = getTrendMovies();
     });
   }
 
-  void handleSelectCategory(int index) {
+  void handleSelectCategory(int idx) {
     setState(() {
-      _selectedCategoryIndex = index;
+      _selectedCategoryIndex = idx;
     });
   }
 
@@ -58,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: index == _selectedCategoryIndex
                                   ? AppColors.primaryColor
-                                  : AppColors.darkSecondaryColor,
+                                  : AppColors.secondaryDarkColor,
                               minimumSize: const Size(70, 35.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -75,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         )),
                   )),
               Container(
+                  height: 180,
                   margin: const EdgeInsets.symmetric(vertical: 28),
                   height: 180,
                   child: Swiper(
@@ -84,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Container(
                             height: 180,
                             decoration: BoxDecoration(
-                              color: AppColors.darkSecondaryColor,
+                              color: AppColors.secondaryDarkColor,
                               borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
                                 image: const NetworkImage(
@@ -146,24 +152,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ])),
                       );
                     },
-                    itemHeight: 180,
-                    itemCount: 4,
-                    viewportFraction: 0.8,
-                    scale: 0.9,
-                    pagination: SwiperPagination(
-                      builder: SwiperCustomPagination(
-                        builder:
-                            (BuildContext context, SwiperPluginConfig config) {
-                          return Transform.translate(
-                            offset: const Offset(0, 35),
-                            child: const DotSwiperPaginationBuilder(
-                              color: Colors.white70,
-                              activeColor: AppColors.primaryColor,
-                            ).build(context, config),
-                          );
-                        },
-                      ),
-                    ),
                   )),
             ],
           ),

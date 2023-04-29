@@ -71,7 +71,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         color: AppColors.darkSecondaryColor,
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: NetworkImage(_categories[index].imageUrl),
+                          image: NetworkImage(_categories[index].imageUrl ?? ''),
                           fit: BoxFit.cover,
                           colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.5),
