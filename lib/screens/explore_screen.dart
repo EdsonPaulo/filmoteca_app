@@ -20,12 +20,38 @@ class _ExploreScreenState extends State<ExploreScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              child: const Text(
-                'EXPLORAR',
-                style: TextStyle(color: AppColors.primaryColor),
+            Column(children: [
+              Row(
+            children: [
+              TextField(
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  hintText: 'Pesquisar por título, ator...',
+                  prefixIcon: const Icon(Icons.search,
+                      color: AppColors.primaryColor),
+                  contentPadding: EdgeInsets.zero,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: const Color(0xFF2A2D38),
+                ),
               ),
-            )
+              IconButton(
+                icon: const Icon(
+                  size: 16,
+                  Icons.filter_alt_outlined,
+                  color: AppColors.primaryColor,
+                ),
+                onPressed: () {
+                  //Colocar acção aqui!
+                },
+              ),
+            ],
+              ),
+             
+            ])
           ],
         ),
       ),
