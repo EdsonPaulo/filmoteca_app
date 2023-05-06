@@ -1,5 +1,4 @@
 import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/utils/string_helpers.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     super.initState();
 
     setState(() {
-      _movie = fetchMovieById(widget.movie.id) as MovieModel;
+      //  _movie = fetchMovieById(widget.movie.id) as MovieModel;
     });
   }
 

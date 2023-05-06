@@ -18,6 +18,10 @@ class FavoriteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String movieDateOrDuration = movie.duration == null
+        ? 'Lançamento: ${movie.releaseDate}'
+        : formatDuration(movie.duration);
+
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -58,11 +62,9 @@ class FavoriteCard extends StatelessWidget {
                           fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      movie.duration == null
-                          ? movie.releaseDate
-                          : formatDuration(movie.duration),
+                      movieDateOrDuration,
                       style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 12,
                           color: Colors.white70,
                           fontWeight: FontWeight.w400),
                     ),
