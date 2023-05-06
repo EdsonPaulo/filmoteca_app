@@ -3,6 +3,8 @@ import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/widgets/shared/movie_card.dart';
 import 'package:flutter/material.dart';
 
+import '../shared/favorite_movie_card.dart';
+
 class MoviesVerticalList extends StatelessWidget {
   final Future<List<MovieModel>> favoriteMovies;
 
@@ -26,26 +28,26 @@ class MoviesVerticalList extends StatelessWidget {
                 itemCount: movies.length,
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 4),
                 itemBuilder: ((context, index) => Container(
                       margin: const EdgeInsets.only(bottom: 14),
                       decoration: BoxDecoration(
                         color: AppColors.darkSecondaryColor,
                         borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
+                        /*image: DecorationImage(
                           image: NetworkImage(movies[index].coverImgUrl),
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
                           colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.5),
                             BlendMode.srcATop,
                           ),
-                        ),
+                        ),*/
                       ),
-                      child: MovieCard(
+                     child: FavoriteCard(
                         movie: movies[index],
                         width: 346,
                         height: 135,
-                        showInfo: false,
+                        showInfo: true,
                       ),
                     )),
               );
