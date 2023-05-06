@@ -9,8 +9,6 @@ import '../widgets/home/movies_vertical_list.dart';
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
 
-  
-
   @override
   _FavoritesScreenState createState() => _FavoritesScreenState();
 }
@@ -19,23 +17,22 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   List<MovieModel> _movies = [];
   late Future<List<MovieModel>> _favmovies;
 
-
   @override
-  void initState(){
+  void initState() {
     super.initState();
     setState(() {
       _movies = [];
       _favmovies = fetchMovies('now_playing');
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.darkPrimaryColor,
       appBar: const CustomHomeAppBar(),
       body: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
         child: Column(
           children: [
             Container(
@@ -45,18 +42,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 'Meus Favoritos',
                 style: TextStyle(
                   color: AppColors.primaryColor,
-                  fontSize:32,
+                  fontSize: 32,
                   fontWeight: FontWeight.w800,
                 ),
               ),
             ),
-            Expanded(child: SingleChildScrollView(
-              child: Column(children: [
-                MoviesVerticalList(
-                  favoriteMovies: _favmovies
-                ),
-              ],)
-              ))
+            Expanded(
+              child: MoviesVerticalList(favoriteMovies: _favmovies),
+            )
           ],
         ),
       ),
