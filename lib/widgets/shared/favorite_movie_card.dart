@@ -33,14 +33,13 @@ class FavoriteCard extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(right: 5),
-              height: 150,
               width: 100,
               decoration: BoxDecoration(
                 color: AppColors.darkSecondaryColor,
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   image: NetworkImage(movie.posterImgUrl),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
@@ -57,14 +56,14 @@ class FavoriteCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 17,
                           color: Colors.white,
                           fontWeight: FontWeight.w500),
                     ),
                     Text(
                       movieDateOrDuration,
                       style: const TextStyle(
-                          fontSize: 12,
+                          fontSize: 13,
                           color: Colors.white70,
                           fontWeight: FontWeight.w400),
                     ),

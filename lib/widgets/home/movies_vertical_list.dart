@@ -31,7 +31,7 @@ class MoviesVerticalList extends StatelessWidget {
                   ),
                   child: FavoriteCard(
                     movie: movies[index],
-                    height: 120,
+                    height: 135,
                   ),
                 )),
           );
