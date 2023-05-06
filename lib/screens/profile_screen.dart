@@ -11,6 +11,34 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  Widget _profileButton({
+    required String label,
+    required IconData iconData,
+    Function()? onPressed,
+  }) {
+    return TextButton(
+      style: ButtonStyle(
+          overlayColor: MaterialStatePropertyAll(Colors.grey.shade700)),
+      onPressed: onPressed,
+      child: Row(
+        children: [
+          Icon(iconData, color: Colors.white),
+          const SizedBox(width: 12),
+          Text(
+            label,
+            style: const TextStyle(
+                fontSize: 16, color: Colors.white, fontWeight: FontWeight.w400),
+          ),
+          const Spacer(),
+          const Icon(
+            CupertinoIcons.chevron_right,
+            color: Colors.white,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,109 +91,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(children: [
-                      TextButton(
+                      _profileButton(
+                        label: "Linguagem",
+                        iconData: CupertinoIcons.globe,
                         onPressed: () {},
-                        child: Row(
-                          children: const [
-                            Icon(CupertinoIcons.globe, color: Colors.white),
-                            SizedBox(width: 12),
-                            Text(
-                              "Linguagem",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Spacer(),
-                            Icon(
-                              CupertinoIcons.chevron_right,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
                       ),
                       const SizedBox(height: 10),
-
-                      TextButton(
+                      _profileButton(
+                        label: "Editar Perfil",
+                        iconData: CupertinoIcons.pencil_outline,
                         onPressed: () {},
-                        child: Row(
-                          children: const [
-                            Icon(CupertinoIcons.pencil_outline,
-                                color: Colors.white),
-                            SizedBox(width: 12),
-                            Text(
-                              "Editar Perfil",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Spacer(),
-                            Icon(
-                              CupertinoIcons.chevron_right,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
                       ),
                       const SizedBox(height: 10),
-
-                      TextButton(
+                      _profileButton(
+                        label: "Configurações",
+                        iconData: CupertinoIcons.settings,
                         onPressed: () {},
-                        child: Row(
-                          children: const [
-                            Icon(CupertinoIcons.settings, color: Colors.white),
-                            SizedBox(width: 12),
-                            Text(
-                              "Configurações",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Spacer(),
-                            Icon(
-                              CupertinoIcons.chevron_right,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
                       ),
-                      //SizedBox(height: 10),
-
-                      TextButton(
-                        onPressed: () {
-                          // Adicione aqui o código que deve ser executado quando o botão for pressionado
-                        },
-                        child: Row(
-                          children: const [
-                            Icon(
-                              CupertinoIcons.info_circle,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              "Ajuda & Perguntas Frequentes",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Spacer(),
-                            Icon(
-                              CupertinoIcons.chevron_right,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
+                      const SizedBox(height: 10),
+                      _profileButton(
+                        label: "Ajuda & FAQ",
+                        iconData: CupertinoIcons.info_circle,
+                        onPressed: () {},
                       ),
                     ]),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/login');
-                          // Adicione aqui o código que deve ser executado quando o botão for pressionado
+                          Navigator.pushNamed(context, '/welcome');
                         },
                         style: ButtonStyle(
                           elevation: MaterialStateProperty.all(0),

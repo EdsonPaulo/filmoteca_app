@@ -21,7 +21,12 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          '/movie_details',
+          arguments: movie,
+        );
+      },
       child: Container(
           width: width,
           height: height,

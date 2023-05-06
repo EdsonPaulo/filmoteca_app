@@ -49,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 30),
                 CustomTextField(
                   label: 'Nome e Sobrenome',
-                  leftIcon: CupertinoIcons.mail,
+                  leftIcon: CupertinoIcons.person,
                   onChangeText: (val) {
                     setState(() {
                       _name = val;
