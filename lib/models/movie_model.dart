@@ -8,14 +8,15 @@ class ReviewModel {
   int likes;
   bool liked;
 
-  ReviewModel(
-      {required this.id,
-      required this.userName,
-      required this.comment,
-      this.rating = 0.0,
-      this.userImgUrl,
-      this.liked = false,
-      this.likes = 0});
+  ReviewModel({
+    required this.id,
+    required this.userName,
+    required this.comment,
+    this.rating = 0.0,
+    this.userImgUrl,
+    this.liked = false,
+    this.likes = 0,
+  });
 }
 
 /// CAST / ELENCO

@@ -2,6 +2,7 @@ import 'package:filmoteca_app/data/category_data.dart';
 import 'package:filmoteca_app/data/movies_data.dart';
 import 'package:filmoteca_app/models/category_model.dart';
 import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/widgets/home/movies_horizontal_list.dart';
 import 'package:filmoteca_app/widgets/home/trend_movies_carousel.dart';
 import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';

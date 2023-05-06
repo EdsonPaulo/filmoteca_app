@@ -1,8 +1,10 @@
 import 'package:filmoteca_app/models/category_model.dart';
+import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/screens/categories_screen.dart';
 import 'package:filmoteca_app/screens/category_movies_Screen.dart';
 import 'package:filmoteca_app/screens/explore_screen.dart';
 import 'package:filmoteca_app/screens/favorites_screen.dart';
+import 'package:filmoteca_app/screens/movie_details.dart';
 import 'package:filmoteca_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -64,6 +66,13 @@ class MyApp extends StatelessWidget {
             final CategoryModel category = settings.arguments as CategoryModel;
             return MaterialPageRoute(
               builder: (context) => CategoryMoviesScreen(category: category),
+            );
+          }
+
+          if (settings.name == '/movie_details') {
+            final MovieModel movie = settings.arguments as MovieModel;
+            return MaterialPageRoute(
+              builder: (context) => MovieDetailsScreen(movie: movie),
             );
           }
           return null;
