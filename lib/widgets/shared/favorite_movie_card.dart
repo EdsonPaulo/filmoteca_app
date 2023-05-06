@@ -23,7 +23,12 @@ class FavoriteCard extends StatelessWidget {
         : formatDuration(movie.duration);
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed(
+                        '/movie_details',
+                        arguments: movie,
+                      );
+      },
       child: Container(
         width: width,
         height: height,
