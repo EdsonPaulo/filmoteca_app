@@ -11,6 +11,7 @@ List<MovieModel> getTrendMovies() {
       posterImgUrl:
           'http://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg',
       synopsis: 'Lorem ipsum odor merun.',
+      releaseDate: '2023-12-12',
       duration: 0,
       rating: 7.0,
       liked: false,

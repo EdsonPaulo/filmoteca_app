@@ -58,7 +58,9 @@ class FavoriteCard extends StatelessWidget {
                           fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      formatDuration(movie.duration),
+                      movie.duration == null
+                          ? movie.releaseDate
+                          : formatDuration(movie.duration),
                       style: const TextStyle(
                           fontSize: 14,
                           color: Colors.white70,

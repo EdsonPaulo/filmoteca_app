@@ -39,11 +39,12 @@ class MovieModel {
   int id;
   String title;
   double rating;
-  int duration; // in minutes
+  int? duration; // in minutes
   String synopsis;
   String coverImgUrl;
   String posterImgUrl;
   bool liked; // if the current user liked this movie
+  String releaseDate;
   List<String> images;
   List<String> categories;
   List<ReviewModel> reviews;
@@ -64,6 +65,7 @@ class MovieModel {
     this.categories = const [],
     this.reviews = const [],
     this.trailers = const [],
+    this.releaseDate = '',
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -73,6 +75,7 @@ class MovieModel {
       rating: json['vote_average'].toDouble(),
       duration: json['runtime'],
       synopsis: json['overview'],
+      releaseDate: json['release_date'],
       coverImgUrl: 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}',
       posterImgUrl: 'https://image.tmdb.org/t/p/w500${json['poster_path']}',
       images: [],
