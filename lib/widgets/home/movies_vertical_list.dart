@@ -1,8 +1,7 @@
 import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
+import 'package:filmoteca_app/widgets/shared/favorite_movie_card.dart';
 import 'package:flutter/material.dart';
-
-import '../shared/favorite_movie_card.dart';
 
 class MoviesVerticalList extends StatelessWidget {
   final Future<List<MovieModel>> favoriteMovies;

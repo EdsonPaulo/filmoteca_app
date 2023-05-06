@@ -28,7 +28,7 @@ class FavoriteCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.only(right: 14),
+              margin: const EdgeInsets.only(right: 5),
               height: 150,
               width: 100,
               decoration: BoxDecoration(
@@ -40,50 +40,51 @@ class FavoriteCard extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              width: 170,
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    movie.title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    movie.duration.toString(),
-                    style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.white70,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  Text(
-                    movie.categories
-                        .take(2)
-                        .map((c) => capitalizeText(c))
-                        .join(', '),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontSize: 12,
-                        color: AppColors.primaryColor,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ],
+            Expanded(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      movie.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      movie.duration.toString(),
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white70,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    Text(
+                      movie.categories
+                          .take(2)
+                          .map((c) => capitalizeText(c))
+                          .join(', '),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(width: 10),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(children: [
                     const Icon(
