@@ -51,6 +51,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 ),
               ],
             ),
+            const Expanded(
+                child: SizedBox(
+              height: 10,
+            ))
           ],
         ),
       ),
