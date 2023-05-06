@@ -42,7 +42,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 'Meus Favoritos',
                 style: TextStyle(
                   color: AppColors.primaryColor,
-                  fontSize: 32,
+                  fontSize: 30,
                   fontWeight: FontWeight.w800,
                 ),
               ),

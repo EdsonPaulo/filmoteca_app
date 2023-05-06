@@ -15,7 +15,7 @@ class WelcomeScreen extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(image),
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.6),
                 BlendMode.srcATop,

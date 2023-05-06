@@ -16,42 +16,41 @@ class _ExploreScreenState extends State<ExploreScreen> {
       backgroundColor: AppColors.darkPrimaryColor,
       appBar: const CustomHomeAppBar(),
       body: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(children: [
-              Row(
-            children: [
-              TextField(
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  hintText: 'Pesquisar por título, ator...',
-                  prefixIcon: const Icon(Icons.search,
-                      color: AppColors.primaryColor),
-                  contentPadding: EdgeInsets.zero,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    borderSide: BorderSide.none,
+            Row(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: TextField(
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      hintText: 'Pesquisar por título, ator...',
+                      prefixIcon: const Icon(Icons.search,
+                          color: AppColors.primaryColor),
+                      contentPadding: EdgeInsets.zero,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: const Color(0xFF2A2D38),
+                    ),
                   ),
-                  filled: true,
-                  fillColor: const Color(0xFF2A2D38),
                 ),
-              ),
-              IconButton(
-                icon: const Icon(
-                  size: 16,
-                  Icons.filter_alt_outlined,
-                  color: AppColors.primaryColor,
+                IconButton(
+                  iconSize: 30,
+                  icon: const Icon(
+                    Icons.filter_alt_outlined,
+                    color: AppColors.primaryColor,
+                  ),
+                  onPressed: () {
+                    //Colocar acção aqui!
+                  },
                 ),
-                onPressed: () {
-                  //Colocar acção aqui!
-                },
-              ),
-            ],
-              ),
-             
-            ])
+              ],
+            ),
           ],
         ),
       ),
