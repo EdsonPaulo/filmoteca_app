@@ -103,10 +103,15 @@ class FavoriteCard extends StatelessWidget {
                           fontWeight: FontWeight.w500),
                     ),
                   ]),
-                  const Icon(
-                    size: 16,
-                    CupertinoIcons.trash,
-                    color: AppColors.primaryColor,
+                  IconButton(
+                    icon: const Icon(
+                      size: 16,
+                      CupertinoIcons.trash,
+                      color: AppColors.primaryColor,
+                    ),
+                    onPressed: () {
+                      //Colocar acção aqui!
+                    },
                   ),
                 ],
               ),
