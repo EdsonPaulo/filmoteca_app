@@ -23,7 +23,7 @@ class FavoriteCard extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(10),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,7 +43,7 @@ class FavoriteCard extends StatelessWidget {
             Expanded(
               child: Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,14 +53,14 @@ class FavoriteCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 16,
                           color: Colors.white,
                           fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      movie.duration.toString(),
+                      formatDuration(movie.duration),
                       style: const TextStyle(
-                          fontSize: 12,
+                          fontSize: 14,
                           color: Colors.white70,
                           fontWeight: FontWeight.w400),
                     ),
@@ -72,7 +72,7 @@ class FavoriteCard extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                          fontSize: 12,
+                          fontSize: 14,
                           color: AppColors.primaryColor,
                           fontWeight: FontWeight.w400),
                     ),
@@ -81,7 +81,7 @@ class FavoriteCard extends StatelessWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
