@@ -80,9 +80,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   void _handleShareMovie(MovieModel movie) {
     String copy = '${movie.title}\n\n'
         'Data de lançamento: ${movie.releaseDate}\n\n'
-        'Gênero: ${movie.categories.join(',')}\n\n'
-        'Sinopse: ${movie.synopsis}\n\n'
-        'Saiba mais em: ${movie.homepage}';
+        'Gênero: ${movie.categories.join(', ')}\n\n'
+        'Sinopse:\n${movie.synopsis}\n\n'
+        'Saiba mais em: https://www.themoviedb.org/movie/${movie.id}';
 
     Share.share(copy);
   }
@@ -99,7 +99,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
           } else if (snapshot.hasError) {
             return Center(
               child: Text(
-                'Ocorreu um erro no carregamento. \n${snapshot.error}',
+                ' Ocorreu um erro no carregamento. \n${snapshot.error} ',
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.redAccent, fontSize: 24),
               ),
