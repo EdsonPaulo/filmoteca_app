@@ -14,15 +14,14 @@ class FilterScreen extends StatefulWidget {
 
 class _FilterScreen extends State<FilterScreen> {
   List<CategoryModel> _categories = [];
-   final List<Map<String, dynamic>> _orderList = [];
- 
+  final List<String> _orderList = [];
+
   @override
   void initState() {
     super.initState();
 
     setState(() {
       _categories = [CategoryModel(id: -1, name: 'Tudo'), ...getCategories()];
-      
     });
   }
 
@@ -75,10 +74,80 @@ class _FilterScreen extends State<FilterScreen> {
                     //handleSelectCategory(idx);
                   },
                 ),
+                const SizedBox(
+                  height: 50,
+                ),
+                const Text(
+                  'Ordenação',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                FilterHorizontalList(
+                  items:
+                      _categories.map((category) => category.toJson()).toList(),
+                  variant: FilterListVariantType.outlined,
+                  itemRemovable: false,
+                  //selectedItemIndex: _selectedCategoryIndex,
+                  onPressed: (item, idx) {
+                    //handleSelectCategory(idx);
+                  },
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                const Text(
+                  'Ano de Lançamento',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                FilterHorizontalList(
+                  items:
+                      _categories.map((category) => category.toJson()).toList(),
+                  variant: FilterListVariantType.outlined,
+                  itemRemovable: false,
+                  //selectedItemIndex: _selectedCategoryIndex,
+                  onPressed: (item, idx) {
+                    //handleSelectCategory(idx);
+                  },
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                const Text(
+                  'Região',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                FilterHorizontalList(
+                  items:
+                      _categories.map((category) => category.toJson()).toList(),
+                  variant: FilterListVariantType.outlined,
+                  itemRemovable: false,
+                  //selectedItemIndex: _selectedCategoryIndex,
+                  onPressed: (item, idx) {
+                    //handleSelectCategory(idx);
+                  },
+                ),
               ],
             ),
-
-            
           ],
         ),
       ),
