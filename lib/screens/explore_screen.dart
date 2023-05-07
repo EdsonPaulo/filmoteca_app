@@ -2,6 +2,10 @@ import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 
+import '../data/movies_data.dart';
+import '../models/movie_model.dart';
+import '../widgets/shared/movie_card.dart';
+
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
 
@@ -10,6 +14,17 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
+  List<MovieModel> _movies = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    setState(() {
+      _movies = getTrendMovies();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,10 +66,25 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 ),
               ],
             ),
-            const Expanded(
-                child: SizedBox(
-              height: 10,
-            ))
+            /// LUGAR DOS FILTROS
+                const SizedBox(
+              height: 100,
+            ),
+            Expanded(
+              child: GridView.builder(
+                itemCount: _movies.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return MovieCard(movie: _movies[index], showInfo: true);
+                },
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: MediaQuery.of(context).size.width /
+                      (150 * MediaQuery.of(context).devicePixelRatio),
+                ),
+              ),
+            ),
           ],
         ),
       ),
