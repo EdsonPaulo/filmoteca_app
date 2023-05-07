@@ -83,6 +83,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       child: Center(
                         child: Text(
                           capitalizeText(_categories[index].name),
+                          textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 24,

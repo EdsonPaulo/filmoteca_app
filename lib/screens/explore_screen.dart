@@ -1,9 +1,9 @@
+import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 
 import '../data/category_data.dart';
-import '../data/movies_data.dart';
 import '../models/category_model.dart';
 import '../models/movie_model.dart';
 import '../widgets/shared/filter_horizontal_list.dart';
@@ -17,7 +17,7 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  List<MovieModel> _movies = [];
+  late Future<List<MovieModel>> _moviesFuture;
   List<CategoryModel> _categories = [];
 
   @override
@@ -25,7 +25,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     super.initState();
 
     setState(() {
-      _movies = getTrendMovies();
+      _moviesFuture = fetchMovies('popular');
       _categories = [CategoryModel(id: -1, name: 'Tudo'), ...getCategories()];
     });
   }
@@ -47,6 +47,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       hintText: 'Pesquisar por título, ator...',
+                      hintStyle: const TextStyle(color: Colors.white70),
                       prefixIcon: const Icon(Icons.search,
                           color: AppColors.primaryColor),
                       contentPadding: EdgeInsets.zero,
@@ -72,7 +73,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 ),
               ],
             ),
-
             const SizedBox(
               height: 20,
             ),
@@ -89,20 +89,39 @@ class _ExploreScreenState extends State<ExploreScreen> {
               height: 20,
             ),
             Expanded(
-              child: GridView.builder(
-                itemCount: _movies.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return MovieCard(movie: _movies[index], showInfo: true);
+              child: FutureBuilder<List<MovieModel>>(
+                future: _moviesFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        'Ocorreu um erro no carregamento. \n${snapshot.error}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.redAccent, fontSize: 24),
+                      ),
+                    );
+                  } else {
+                    List<MovieModel> movies = snapshot.data!;
+                    return GridView.builder(
+                      itemCount: movies.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return MovieCard(movie: movies[index], showInfo: true);
+                      },
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        childAspectRatio: MediaQuery.of(context).size.width /
+                            (150 * MediaQuery.of(context).devicePixelRatio),
+                      ),
+                    );
+                  }
                 },
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: MediaQuery.of(context).size.width /
-                      (150 * MediaQuery.of(context).devicePixelRatio),
-                ),
               ),
-            ),
+            )
           ],
         ),
       ),

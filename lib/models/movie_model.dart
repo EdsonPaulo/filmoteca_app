@@ -45,6 +45,7 @@ class MovieModel {
   String posterImgUrl;
   bool liked; // if the current user liked this movie
   String releaseDate;
+  String homepage;
   List<String> images;
   List<String> categories;
   List<ReviewModel> reviews;
@@ -66,6 +67,7 @@ class MovieModel {
     this.reviews = const [],
     this.trailers = const [],
     this.releaseDate = '',
+    this.homepage = '',
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -76,12 +78,21 @@ class MovieModel {
       duration: json['runtime'],
       synopsis: json['overview'],
       releaseDate: json['release_date'],
+      homepage: json['homepage'],
       coverImgUrl: 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}',
       posterImgUrl: 'https://image.tmdb.org/t/p/w500${json['poster_path']}',
       images: [],
-      categories: (json['genre_ids'] as List<dynamic>)
-          .map((gId) => genres[gId]!)
-          .toList() as dynamic,
+      categories: json['genres'] != null
+          ? ((json['genres']) as List<dynamic>)
+              .map((g) => g['name'])
+              .toList()
+              .cast<String>()
+          : json['genre_ids'] != null
+              ? ((json['genre_ids']) as List<dynamic>)
+                  .map((gId) => genres[gId]!)
+                  .toList()
+                  .cast<String>()
+              : [],
       reviews: [],
       cast: [],
       trailers: [],
