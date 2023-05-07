@@ -2,8 +2,11 @@ import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 
+import '../data/category_data.dart';
 import '../data/movies_data.dart';
+import '../models/category_model.dart';
 import '../models/movie_model.dart';
+import '../widgets/shared/filter_horizontal_list.dart';
 import '../widgets/shared/movie_card.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -15,6 +18,7 @@ class ExploreScreen extends StatefulWidget {
 
 class _ExploreScreenState extends State<ExploreScreen> {
   List<MovieModel> _movies = [];
+  List<CategoryModel> _categories = [];
 
   @override
   void initState() {
@@ -22,6 +26,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
     setState(() {
       _movies = getTrendMovies();
+      _categories = [CategoryModel(id: -1, name: 'Tudo'), ...getCategories()];
     });
   }
 
@@ -67,9 +72,21 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 ),
               ],
             ),
-            /// LUGAR DOS FILTROS
-                const SizedBox(
-              height: 100,
+
+            const SizedBox(
+              height: 20,
+            ),
+            FilterHorizontalList(
+              items: _categories.map((category) => category.toJson()).toList(),
+              variant: FilterListVariantType.filled,
+              itemRemovable: true,
+              //selectedItemIndex: _selectedCategoryIndex,
+              onPressed: (item, idx) {
+                //handleSelectCategory(idx);
+              },
+            ),
+            const SizedBox(
+              height: 20,
             ),
             Expanded(
               child: GridView.builder(
