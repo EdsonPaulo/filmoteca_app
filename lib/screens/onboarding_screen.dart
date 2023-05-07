@@ -36,7 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/onboarding_bg.png'),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
           ),

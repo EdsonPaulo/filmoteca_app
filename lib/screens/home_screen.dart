@@ -1,5 +1,4 @@
 import 'package:filmoteca_app/data/category_data.dart';
-import 'package:filmoteca_app/data/movies_data.dart';
 import 'package:filmoteca_app/models/category_model.dart';
 import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
@@ -21,8 +20,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<CategoryModel> _categories = [];
-  List<MovieModel> _trendMovies = [];
-  List<MovieModel> _latestMovies = [];
   late Future<List<MovieModel>> _popularMovies;
   late Future<List<MovieModel>> _newMovies;
   late Future<List<MovieModel>> _topRatedMovies;
@@ -36,8 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     setState(() {
       _categories = [CategoryModel(id: -1, name: 'Tudo'), ...getCategories()];
-      _trendMovies = getTrendMovies();
-      _latestMovies = getTrendMovies();
 
       _newMovies = fetchMovies('now_playing');
       _popularMovies = fetchMovies('popular');

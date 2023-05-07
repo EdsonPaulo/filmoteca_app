@@ -30,7 +30,12 @@ class TrendMoviesCarousel extends StatelessWidget {
             scale: 0.9,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    '/movie_details',
+                    arguments: movies[index],
+                  );
+                },
                 child: Container(
                   height: 180,
                   decoration: BoxDecoration(

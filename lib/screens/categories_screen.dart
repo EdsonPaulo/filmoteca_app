@@ -38,7 +38,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               child: const Text(
                 'Categorias',
                 style: TextStyle(
-                  fontSize: 36,
+                  fontSize: 32,
                   color: AppColors.primaryColor,
                   fontWeight: FontWeight.w800,
                 ),
@@ -71,8 +71,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         color: AppColors.darkSecondaryColor,
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: NetworkImage(_categories[index].imageUrl ?? ''),
-                          fit: BoxFit.cover,
+                          image:
+                              NetworkImage(_categories[index].imageUrl ?? ''),
+                          fit: BoxFit.fill,
                           colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.5),
                             BlendMode.srcATop,
@@ -82,6 +83,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       child: Center(
                         child: Text(
                           capitalizeText(_categories[index].name),
+                          textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 24,
