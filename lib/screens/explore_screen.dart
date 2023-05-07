@@ -62,6 +62,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ),
                   onPressed: () {
                     //Colocar acção aqui!
+                    Navigator.of(context).pushNamed('/filter');
                   },
                 ),
               ],
