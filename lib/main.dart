@@ -5,7 +5,7 @@ import 'package:filmoteca_app/screens/category_movies_Screen.dart';
 import 'package:filmoteca_app/screens/explore_screen.dart';
 import 'package:filmoteca_app/screens/favorites_screen.dart';
 import 'package:filmoteca_app/screens/filter_screen.dart';
-import 'package:filmoteca_app/screens/movie_details.dart';
+import 'package:filmoteca_app/screens/movie_details_screen.dart';
 import 'package:filmoteca_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
