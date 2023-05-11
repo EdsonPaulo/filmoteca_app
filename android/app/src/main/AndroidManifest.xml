@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.filmoteca_app">
+    package="com.ucan.filmoteca">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="filmoteca_app"
+        android:label="Filmoteca"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

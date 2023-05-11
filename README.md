@@ -13,6 +13,13 @@ A Movie Catalog & Rate/Review App.
  flutter run --no-sound-null-safety
 ```
 
+## Building
+- Android:
+```
+flutter build apk --no-sound-null-safety
+````
+Output Path: build/app/outputs/flutter-apk/app-release.apk
+
 
 ## Folders Structure (/lib directory)
 
