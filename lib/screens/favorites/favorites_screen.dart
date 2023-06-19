@@ -1,10 +1,10 @@
 import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
-import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
+import 'package:filmoteca_app/shared/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 
-import '../widgets/home/movies_vertical_list.dart';
+import 'movies_vertical_list.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});

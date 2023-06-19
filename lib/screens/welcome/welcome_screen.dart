@@ -1,5 +1,5 @@
-import 'package:filmoteca_app/widgets/shared/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:filmoteca_app/shared/widgets/custom_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

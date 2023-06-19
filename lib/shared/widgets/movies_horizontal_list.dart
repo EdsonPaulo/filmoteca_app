@@ -1,6 +1,6 @@
 import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
-import 'package:filmoteca_app/widgets/shared/movie_card.dart';
+import 'package:filmoteca_app/shared/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
 
 class MoviesHorizontalList extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:filmoteca_app/utils/app_colors.dart';
-import 'package:filmoteca_app/widgets/shared/custom_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:filmoteca_app/shared/widgets/custom_button.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

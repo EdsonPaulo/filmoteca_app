@@ -1,22 +1,22 @@
 import 'package:filmoteca_app/models/category_model.dart';
 import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/screens/categories_screen.dart';
-import 'package:filmoteca_app/screens/category_movies_Screen.dart';
-import 'package:filmoteca_app/screens/explore_screen.dart';
-import 'package:filmoteca_app/screens/favorites_screen.dart';
-import 'package:filmoteca_app/screens/filter_screen.dart';
-import 'package:filmoteca_app/screens/movie_details_screen.dart';
-import 'package:filmoteca_app/screens/profile_screen.dart';
+import 'package:filmoteca_app/screens/categories/categories_screen.dart';
+import 'package:filmoteca_app/screens/categories/category_movies_Screen.dart';
+import 'package:filmoteca_app/screens/explore/explore_screen.dart';
+import 'package:filmoteca_app/screens/favorites/favorites_screen.dart';
+import 'package:filmoteca_app/screens/explore/filter_screen.dart';
+import 'package:filmoteca_app/screens/movie_details/movie_details_screen.dart';
+import 'package:filmoteca_app/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import 'package:filmoteca_app/screens/onboarding_screen.dart';
-import 'package:filmoteca_app/screens/splash_screen.dart';
-import 'package:filmoteca_app/screens/welcome_screen.dart';
-import 'package:filmoteca_app/screens/login_screen.dart';
-import 'package:filmoteca_app/screens/register_screen.dart';
-import 'package:filmoteca_app/screens/home_screen.dart';
+import 'package:filmoteca_app/screens/welcome/onboarding_screen.dart';
+import 'package:filmoteca_app/screens/welcome/splash_screen.dart';
+import 'package:filmoteca_app/screens/welcome/welcome_screen.dart';
+import 'package:filmoteca_app/screens/auth/login_screen.dart';
+import 'package:filmoteca_app/screens/auth/register_screen.dart';
+import 'package:filmoteca_app/screens/home/home_screen.dart';
 import 'package:filmoteca_app/screens/main_tabs_screen.dart';
 import 'package:filmoteca_app/utils/navigation_model.dart';
 
