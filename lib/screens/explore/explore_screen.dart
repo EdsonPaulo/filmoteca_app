@@ -1,13 +1,13 @@
 import 'package:filmoteca_app/services/get_movies.dart';
-import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 
-import '../data/category_data.dart';
-import '../models/category_model.dart';
-import '../models/movie_model.dart';
-import '../widgets/shared/filter_horizontal_list.dart';
-import '../widgets/shared/movie_card.dart';
+import 'package:filmoteca_app/data/category_data.dart';
+import 'package:filmoteca_app/models/category_model.dart';
+import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/shared/widgets/custom_appbar.dart';
+import 'package:filmoteca_app/shared/widgets/movie_card.dart';
+import 'package:filmoteca_app/shared/widgets/filter_horizontal_list.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});

@@ -2,10 +2,11 @@ import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/utils/string_helpers.dart';
-import 'package:filmoteca_app/widgets/home/movie_details_tabs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+
+import 'movie_details_bottom_tabs.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   final MovieModel movie;
@@ -84,7 +85,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
         'Gênero: ${movie.categories.join(', ')}\n\n'
         'Sinopse:\n${movie.synopsis}\n\n'
         'Saiba mais em: https://www.themoviedb.org/movie/${movie.id}';
-        
+
     Share.share(copy);
   }
 

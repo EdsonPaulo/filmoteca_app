@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
-import '../widgets/shared/custom_button.dart';
-import '../widgets/shared/custom_textfield.dart';
+import 'package:filmoteca_app/utils/app_colors.dart';
+import 'package:filmoteca_app/shared/widgets/custom_button.dart';
+import 'package:filmoteca_app/shared/widgets/custom_textfield.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

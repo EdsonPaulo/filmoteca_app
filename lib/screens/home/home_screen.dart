@@ -2,12 +2,13 @@ import 'package:filmoteca_app/data/category_data.dart';
 import 'package:filmoteca_app/models/category_model.dart';
 import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
-import 'package:filmoteca_app/widgets/home/movies_horizontal_list.dart';
-import 'package:filmoteca_app/widgets/home/trend_movies_carousel.dart';
-import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
-import 'package:filmoteca_app/widgets/shared/filter_horizontal_list.dart';
+import 'package:filmoteca_app/shared/widgets/custom_appbar.dart';
+import 'package:filmoteca_app/shared/widgets/filter_horizontal_list.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import 'package:filmoteca_app/shared/widgets/movies_horizontal_list.dart';
+import 'package:filmoteca_app/screens/home/trend_movies_carousel.dart';
 
 // http://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg
 

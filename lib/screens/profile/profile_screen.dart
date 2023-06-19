@@ -1,7 +1,7 @@
-import 'package:filmoteca_app/widgets/shared/custom_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
+import 'package:filmoteca_app/shared/widgets/custom_appbar.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
