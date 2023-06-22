@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/services/get_movies.dart';
 
 class FavoritesBloc {
   final _favoritesController = StreamController<List<MovieModel>>();
@@ -9,10 +10,16 @@ class FavoritesBloc {
 
   final List<MovieModel> _favoriteList = [];
 
+  void fetchDataFromApi() async {
+    List<MovieModel> apiData = await fetchMovies('now_playing');
+    _favoritesController.add(apiData);
+  }
+
   void addToFavorites(MovieModel movie) {
     if (!isFavoriteMovie(movie.id)) {
       _favoriteList.add(movie);
       _inputFavorites.add(_favoriteList);
+      _favoritesController.add(_favoriteList);
     }
   }
 

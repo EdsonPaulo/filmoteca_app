@@ -1,4 +1,5 @@
 import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/screens/favorites/favorites_bloc.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/shared/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -14,16 +15,18 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
-  List<MovieModel> _movies = [];
-  late Future<List<MovieModel>> _favmovies;
+  final _favoritesBloc = FavoritesBloc();
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _movies = [];
-      _favmovies = fetchMovies('now_playing');
-    });
+    _favoritesBloc.fetchDataFromApi();
+  }
+
+  @override
+  void dispose() {
+    _favoritesBloc.dispose();
+    super.dispose();
   }
 
   @override
@@ -48,7 +51,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               ),
             ),
             Expanded(
-              child: MoviesVerticalList(favoriteMovies: _favmovies),
+              child: MoviesVerticalList(),
             )
           ],
         ),
