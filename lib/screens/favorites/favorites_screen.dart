@@ -16,11 +16,13 @@ class FavoritesScreen extends StatefulWidget {
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
   final _favoritesBloc = FavoritesBloc();
+  late Future<List<MovieModel>> favoriteMovies;
 
   @override
   void initState() {
     super.initState();
     _favoritesBloc.fetchDataFromApi();
+    print("Favorite Screen Init");
   }
 
   @override
@@ -51,7 +53,26 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               ),
             ),
             Expanded(
-              child: MoviesVerticalList(),
+              child: StreamBuilder<List<MovieModel>>(
+                stream: _favoritesBloc.favorites,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<MovieModel> movies = snapshot.data!;
+                    return MoviesVerticalList(favoriteMovies: movies);
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        'Ocorreu um erro no carregamento: \n${snapshot.error}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.redAccent, fontSize: 16),
+                      ),
+                    );
+                  }
+                  // Enquanto os dados não são carregados, exibir um indicador de carregamento
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
             )
           ],
         ),
