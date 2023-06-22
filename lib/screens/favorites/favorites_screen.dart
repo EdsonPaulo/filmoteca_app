@@ -1,8 +1,9 @@
 import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/services/get_movies.dart';
+import 'package:filmoteca_app/screens/favorites/favorites_bloc.dart';
 import 'package:filmoteca_app/shared/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
+import 'package:get_it/get_it.dart';
 
 import 'movies_vertical_list.dart';
 
@@ -14,17 +15,7 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
-  List<MovieModel> _movies = [];
-  late Future<List<MovieModel>> _favmovies;
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      _movies = [];
-      _favmovies = fetchMovies('now_playing');
-    });
-  }
+  FavoritesBloc favoritesBloc = GetIt.instance<FavoritesBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +39,25 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               ),
             ),
             Expanded(
-              child: MoviesVerticalList(favoriteMovies: _favmovies),
+              child: StreamBuilder<List<MovieModel>>(
+                stream: favoritesBloc.favorites,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<MovieModel> movies = snapshot.data!;
+                    return MoviesVerticalList(favoriteMovies: movies);
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        'Ocorreu um erro no carregamento: \n${snapshot.error}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.redAccent, fontSize: 16),
+                      ),
+                    );
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
             )
           ],
         ),

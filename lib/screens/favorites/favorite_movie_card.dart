@@ -8,9 +8,11 @@ class FavoriteCard extends StatelessWidget {
   final MovieModel movie;
   final double width;
   final double height;
+  final Function() onRemove;
 
   const FavoriteCard({
     super.key,
+    required this.onRemove,
     required this.movie,
     this.width = 0,
     this.height = 0,
@@ -25,9 +27,9 @@ class FavoriteCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(
-                        '/movie_details',
-                        arguments: movie,
-                      );
+          '/movie_details',
+          arguments: movie,
+        );
       },
       child: Container(
         width: width,
@@ -115,9 +117,7 @@ class FavoriteCard extends StatelessWidget {
                       CupertinoIcons.trash,
                       color: AppColors.primaryColor,
                     ),
-                    onPressed: () {
-                      //Colocar acção aqui!
-                    },
+                    onPressed: () => onRemove(),
                   ),
                 ],
               ),

@@ -1,10 +1,12 @@
 import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/screens/favorites/favorites_bloc.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/utils/string_helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:get_it/get_it.dart';
 
 import 'movie_details_bottom_tabs.dart';
 
@@ -19,7 +21,8 @@ class MovieDetailsScreen extends StatefulWidget {
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   late Future<MovieModel> _movieFuture;
-  bool _isLiked = false;
+
+  FavoritesBloc favoritesBloc = GetIt.instance<FavoritesBloc>();
 
   @override
   void initState() {
@@ -175,13 +178,17 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                 ),
                                 const SizedBox(width: 10),
                                 _renderIconButton(
-                                  icon: _isLiked
+                                  icon: favoritesBloc.isFavoriteMovie(movie.id)
                                       ? CupertinoIcons.heart_fill
                                       : CupertinoIcons.heart,
                                   onTap: () {
                                     setState(() {
-                                      _isLiked = !_isLiked;
+                                      favoritesBloc.isFavoriteMovie(movie.id)
+                                          ? favoritesBloc
+                                              .removeFromFavorites(movie)
+                                          : favoritesBloc.addToFavorites(movie);
                                     });
+                                    print("Favoritado");
                                   },
                                 )
                               ],
