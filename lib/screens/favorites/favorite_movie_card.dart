@@ -1,5 +1,4 @@
 import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/screens/favorites/favorites_bloc.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/utils/string_helpers.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,10 +8,11 @@ class FavoriteCard extends StatelessWidget {
   final MovieModel movie;
   final double width;
   final double height;
-  final _favoritesBloc = FavoritesBloc();
+  final Function() onRemove;
 
-  FavoriteCard({
+  const FavoriteCard({
     super.key,
+    required this.onRemove,
     required this.movie,
     this.width = 0,
     this.height = 0,
@@ -117,10 +117,7 @@ class FavoriteCard extends StatelessWidget {
                       CupertinoIcons.trash,
                       color: AppColors.primaryColor,
                     ),
-                    onPressed: () {
-                      //Colocar acção aqui!
-                      _favoritesBloc.removeFromFavorites(movie);
-                    },
+                    onPressed: () => onRemove(),
                   ),
                 ],
               ),

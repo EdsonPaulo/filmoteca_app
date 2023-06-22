@@ -1,12 +1,15 @@
 import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/screens/favorites/favorites_bloc.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/screens/favorites/favorite_movie_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class MoviesVerticalList extends StatelessWidget {
   final List<MovieModel> favoriteMovies;
+  FavoritesBloc favoritesBloc = GetIt.instance<FavoritesBloc>();
 
-  const MoviesVerticalList({
+  MoviesVerticalList({
     super.key,
     required this.favoriteMovies,
   });
@@ -27,6 +30,7 @@ class MoviesVerticalList extends StatelessWidget {
             child: FavoriteCard(
               movie: favoriteMovies[index],
               height: 135,
+              onRemove: () => favoritesBloc.removeFromFavorites(favoriteMovies[index]),
             ),
           )),
     );

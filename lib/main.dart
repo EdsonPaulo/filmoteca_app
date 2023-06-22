@@ -1,15 +1,6 @@
-import 'package:filmoteca_app/models/category_model.dart';
-import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/screens/app_bottom_tabs.dart';
-import 'package:filmoteca_app/screens/categories/categories_screen.dart';
-import 'package:filmoteca_app/screens/categories/category_movies_Screen.dart';
-import 'package:filmoteca_app/screens/explore/explore_screen.dart';
-import 'package:filmoteca_app/screens/favorites/favorites_screen.dart';
-import 'package:filmoteca_app/screens/explore/filter_screen.dart';
-import 'package:filmoteca_app/screens/movie_details/movie_details_screen.dart';
-import 'package:filmoteca_app/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:filmoteca_app/screens/welcome/onboarding_screen.dart';
 import 'package:filmoteca_app/screens/welcome/splash_screen.dart';
@@ -17,13 +8,46 @@ import 'package:filmoteca_app/screens/welcome/welcome_screen.dart';
 import 'package:filmoteca_app/screens/auth/login_screen.dart';
 import 'package:filmoteca_app/screens/auth/register_screen.dart';
 import 'package:filmoteca_app/screens/home/home_screen.dart';
+import 'package:filmoteca_app/models/category_model.dart';
+import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/screens/app_bottom_tabs.dart';
+import 'package:filmoteca_app/screens/categories/categories_screen.dart';
+import 'package:filmoteca_app/screens/categories/category_movies_Screen.dart';
+import 'package:filmoteca_app/screens/explore/explore_screen.dart';
+import 'package:filmoteca_app/screens/favorites/favorites_bloc.dart';
+import 'package:filmoteca_app/screens/favorites/favorites_screen.dart';
+import 'package:filmoteca_app/screens/explore/filter_screen.dart';
+import 'package:filmoteca_app/screens/movie_details/movie_details_screen.dart';
+import 'package:filmoteca_app/screens/profile/profile_screen.dart';
 
 void main() {
+  GetIt getIt = GetIt.instance;
+  getIt.registerSingleton<FavoritesBloc>(FavoritesBloc());
   runApp(const FilmotecaApp());
 }
 
-class FilmotecaApp extends StatelessWidget {
+class FilmotecaApp extends StatefulWidget {
   const FilmotecaApp({super.key});
+
+  @override
+  _FilmotecaAppState createState() => _FilmotecaAppState();
+}
+
+class _FilmotecaAppState extends State<FilmotecaApp> {
+  FavoritesBloc favoritesBloc = GetIt.instance<FavoritesBloc>();
+
+  @override
+  void initState() {
+    super.initState();
+    favoritesBloc.fetchDataFromApi();
+    print("Favorite Screen Init");
+  }
+
+  @override
+  void dispose() {
+    favoritesBloc.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
