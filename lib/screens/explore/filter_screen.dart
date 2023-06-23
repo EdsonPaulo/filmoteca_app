@@ -1,8 +1,10 @@
+import 'package:filmoteca_app/screens/explore/explore_bloc.dart';
 import 'package:filmoteca_app/shared/widgets/filter_horizontal_list.dart';
 import 'package:flutter/material.dart';
 import 'package:filmoteca_app/data/category_data.dart';
 import 'package:filmoteca_app/models/category_model.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
+import 'package:get_it/get_it.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
@@ -16,6 +18,8 @@ class _FilterScreen extends State<FilterScreen> {
   late int _selectedOrderIndex = 0;
   late int _selectedRealeseIndex = 0;
   late int _selectedRegionsIndex = 0;
+
+  ExploreBloc exploreBloc = GetIt.instance<ExploreBloc>();
 
   List<CategoryModel> _categories = [];
   final List<Map<String, dynamic>> _orderList = [
@@ -110,6 +114,9 @@ class _FilterScreen extends State<FilterScreen> {
                 onPressed: (item, idx) {
                   setState(() {
                     _selectedCategoryIndex = idx;
+                    exploreBloc.isSelectedFilter(idx)
+                        ? exploreBloc.removeFilter(item)
+                        : exploreBloc.addFilter(item);
                     // Atualize o valor do índice selecionado
                   });
                   //handleSelectCategory(idx);
@@ -130,6 +137,9 @@ class _FilterScreen extends State<FilterScreen> {
                   setState(() {
                     _selectedOrderIndex = idx;
                     // Atualize o valor do índice selecionado
+                    exploreBloc.isSelectedFilter(idx)
+                        ? exploreBloc.removeFilter(item)
+                        : exploreBloc.addFilter(item);
                   });
                 },
               ),
@@ -143,6 +153,9 @@ class _FilterScreen extends State<FilterScreen> {
                   setState(() {
                     _selectedRealeseIndex = idx;
                     // Atualize o valor do índice selecionado
+                    exploreBloc.isSelectedFilter(idx)
+                        ? exploreBloc.removeFilter(item)
+                        : exploreBloc.addFilter(item);
                   });
                 },
               ),
@@ -155,6 +168,9 @@ class _FilterScreen extends State<FilterScreen> {
                   //handleSelectCategory(idx);
                   setState(() {
                     _selectedRegionsIndex = idx;
+                    exploreBloc.isSelectedFilter(idx)
+                        ? exploreBloc.removeFilter(item)
+                        : exploreBloc.addFilter(item);
                   });
                 },
               ),

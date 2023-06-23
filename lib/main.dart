@@ -1,3 +1,4 @@
+import 'package:filmoteca_app/screens/explore/explore_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -22,7 +23,10 @@ import 'package:filmoteca_app/screens/profile/profile_screen.dart';
 
 void main() {
   GetIt getIt = GetIt.instance;
+  GetIt getItEx = GetIt.instance;
+
   getIt.registerSingleton<FavoritesBloc>(FavoritesBloc());
+  getItEx.registerSingleton<ExploreBloc>(ExploreBloc());
   runApp(const FilmotecaApp());
 }
 
@@ -35,17 +39,20 @@ class FilmotecaApp extends StatefulWidget {
 
 class _FilmotecaAppState extends State<FilmotecaApp> {
   FavoritesBloc favoritesBloc = GetIt.instance<FavoritesBloc>();
+  ExploreBloc exploreBloc = GetIt.instance<ExploreBloc>();
 
   @override
   void initState() {
     super.initState();
     favoritesBloc.fetchDataFromApi();
+    exploreBloc.initFilters();
     print("Favorite Screen Init");
   }
 
   @override
   void dispose() {
     favoritesBloc.dispose();
+    exploreBloc.dispose();
     super.dispose();
   }
 

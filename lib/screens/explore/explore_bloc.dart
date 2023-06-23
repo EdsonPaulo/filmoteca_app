@@ -6,7 +6,19 @@ class ExploreBloc {
       _exploreController.sink;
   Stream<List<Map<String, dynamic>>> get filters => _exploreController.stream;
 
-  final List<Map<String, dynamic>> _filterList = [];
+  late List<Map<String, dynamic>> _filterList = [];
+
+  void initFilters() {
+    try {
+      _filterList = [
+        {"name": 'Popularidade', "id": 'popularity.desc'},
+        {"name": 'Familia', "id": '123'}
+      ];
+      _inputExplore.add(List<Map<String, dynamic>>.from(_filterList));
+    } catch (e) {
+      print('initFilters: $e');
+    }
+  }
 
   void addFilter(Map<String, dynamic> filter) {
     if (!isSelectedFilter(filter['id'])) {
@@ -27,5 +39,9 @@ class ExploreBloc {
       }
     }
     return false;
+  }
+
+  void dispose() {
+    _exploreController.close();
   }
 }
