@@ -12,6 +12,11 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreen extends State<FilterScreen> {
+  late int _selectedCategoryIndex = 0;
+  late int _selectedOrderIndex = 0;
+  late int _selectedRealeseIndex = 0;
+  late int _selectedRegionsIndex = 0;
+
   List<CategoryModel> _categories = [];
   final List<Map<String, dynamic>> _orderList = [
     {"name": 'Popularidade', "id": 'popularity.desc'},
@@ -101,36 +106,56 @@ class _FilterScreen extends State<FilterScreen> {
                 items:
                     _categories.map((category) => category.toJson()).toList(),
                 variant: FilterListVariantType.outlined,
-                //selectedItemIndex: _selectedCategoryIndex,
+                selectedItemIndex: _selectedCategoryIndex,
                 onPressed: (item, idx) {
+                  setState(() {
+                    _selectedCategoryIndex = idx;
+                    // Atualize o valor do índice selecionado
+                  });
                   //handleSelectCategory(idx);
+                  print('Item selecionado: $item');
+                  print('idx selecionado: $idx');
+                  print(_categories
+                      .map((category) => category.toJson())
+                      .toList());
                 },
               ),
               _renderTitle('Ordenação'),
               FilterHorizontalList(
                 items: _orderList,
                 variant: FilterListVariantType.outlined,
-                //selectedItemIndex: _selectedCategoryIndex,
+                selectedItemIndex: _selectedOrderIndex,
                 onPressed: (item, idx) {
                   //handleSelectCategory(idx);
+                  setState(() {
+                    _selectedOrderIndex = idx;
+                    // Atualize o valor do índice selecionado
+                  });
                 },
               ),
               _renderTitle('Ano de Lançamento'),
               FilterHorizontalList(
                 items: _releaseYears,
                 variant: FilterListVariantType.outlined,
-                //selectedItemIndex: _selectedCategoryIndex,
+                selectedItemIndex: _selectedRealeseIndex,
                 onPressed: (item, idx) {
                   //handleSelectCategory(idx);
+                  setState(() {
+                    _selectedRealeseIndex = idx;
+                    // Atualize o valor do índice selecionado
+                  });
                 },
               ),
               _renderTitle('Região'),
               FilterHorizontalList(
                 items: _regions,
                 variant: FilterListVariantType.outlined,
-                //selectedItemIndex: _selectedCategoryIndex,
+                selectedItemIndex: _selectedRegionsIndex,
                 onPressed: (item, idx) {
                   //handleSelectCategory(idx);
+                  setState(() {
+                    _selectedRegionsIndex = idx;
+                  });
                 },
               ),
             ],
