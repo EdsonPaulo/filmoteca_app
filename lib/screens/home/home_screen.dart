@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     setState(() {
-      _categories = [CategoryModel(id: -1, name: 'Tudo'), ...getCategories()];
+      _categories = [CategoryModel(id: "-1", name: 'Tudo'), ...getCategories()];
 
       _newMovies = fetchMovies('now_playing');
       _popularMovies = fetchMovies('popular');
