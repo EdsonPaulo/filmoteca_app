@@ -94,7 +94,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       _profileButton(
                         label: "Linguagem",
                         iconData: CupertinoIcons.globe,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/language');
+                        },
                       ),
                       const SizedBox(height: 10),
                       _profileButton(

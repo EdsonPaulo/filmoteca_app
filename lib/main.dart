@@ -1,4 +1,5 @@
 import 'package:filmoteca_app/screens/explore/explore_bloc.dart';
+import 'package:filmoteca_app/screens/profile/language_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -74,6 +75,7 @@ class _FilmotecaAppState extends State<FilmotecaApp> {
           '/login': (context) => const LoginScreen(),
           '/register': (context) => const RegisterScreen(),
           '/filter': (context) => const FilterScreen(),
+          '/language':(context) => const LanguageScreen(),
           '/home': (context) => AppBottomTabsScreen(
                 children: const [
                   HomeScreen(),
