@@ -10,14 +10,14 @@ class FilterHorizontalList extends StatelessWidget {
   final FilterListVariantType variant;
   final Function(Map<String, dynamic>, int index) onPressed;
   final bool itemRemovable;
-  final int selectedItemIndex;
+  final String selectedItemIndex;
 
   const FilterHorizontalList({
     super.key,
     required this.items,
     required this.onPressed,
     this.itemRemovable = false,
-    this.selectedItemIndex = 0,
+    this.selectedItemIndex = '',
     this.variant = FilterListVariantType.filled,
   });
 
@@ -39,7 +39,8 @@ class FilterHorizontalList extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          (index == selectedItemIndex || itemRemovable)
+                          (items[index]['id'] == selectedItemIndex ||
+                                  itemRemovable)
                               ? AppColors.primaryColor
                               : variant == FilterListVariantType.filled
                                   ? AppColors.darkSecondaryColor

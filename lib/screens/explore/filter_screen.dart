@@ -14,11 +14,6 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreen extends State<FilterScreen> {
-  late int _selectedCategoryIndex = 0;
-  late int _selectedOrderIndex = 0;
-  late int _selectedRealeseIndex = 0;
-  late int _selectedRegionsIndex = 0;
-
   ExploreBloc exploreBloc = GetIt.instance<ExploreBloc>();
 
   List<CategoryModel> _categories = [];
@@ -31,12 +26,12 @@ class _FilterScreen extends State<FilterScreen> {
     {"name": 'Ordem Alfabética Z-A', "id": 'original_title.desc'},
   ];
   final List<Map<String, dynamic>> _releaseYears = [
-    {"name": '2023'},
-    {"name": '2022'},
-    {"name": '2021'},
-    {"name": '2020'},
-    {"name": '2019'},
-    {"name": '<2018'},
+    {"name": '2023', "id": '2023'},
+    {"name": '2022', "id": '2022'},
+    {"name": '2021', "id": '2021'},
+    {"name": '2020', "id": '2020'},
+    {"name": '2019', "id": '2019'},
+    {"name": '<2018', "id": '<2018'},
   ];
   final List<Map<String, dynamic>> _regions = [
     {"name": "Estados Unidos", "id": "US"},
@@ -110,36 +105,34 @@ class _FilterScreen extends State<FilterScreen> {
                 items:
                     _categories.map((category) => category.toJson()).toList(),
                 variant: FilterListVariantType.outlined,
-                selectedItemIndex: _selectedCategoryIndex,
+                selectedItemIndex: exploreBloc.getCategory(),
                 onPressed: (item, idx) {
                   setState(() {
-                    _selectedCategoryIndex = idx;
-                    exploreBloc.isSelectedFilter(idx)
-                        ? exploreBloc.removeFilter(item)
-                        : exploreBloc.addFilter(item);
+                    exploreBloc.actulizarCategory(item['id']);
+                    //exploreBloc.isSelectedFilter(item['id'])
+                    // ? exploreBloc.removeFilter(item)
+                    //: exploreBloc.addFilter(item);
                     // Atualize o valor do índice selecionado
+                    if (!exploreBloc.isSelectedFilter(item['id'])) {
+                      exploreBloc.addFilter(item);
+                    }
                   });
                   //handleSelectCategory(idx);
-                  print('Item selecionado: $item');
-                  print('idx selecionado: $idx');
-                  print(_categories
-                      .map((category) => category.toJson())
-                      .toList());
                 },
               ),
               _renderTitle('Ordenação'),
               FilterHorizontalList(
                 items: _orderList,
                 variant: FilterListVariantType.outlined,
-                selectedItemIndex: _selectedOrderIndex,
+                selectedItemIndex: exploreBloc.getOrder(),
                 onPressed: (item, idx) {
                   //handleSelectCategory(idx);
                   setState(() {
-                    _selectedOrderIndex = idx;
+                    exploreBloc.actulizarOrder(item['id']);
                     // Atualize o valor do índice selecionado
-                    exploreBloc.isSelectedFilter(idx)
-                        ? exploreBloc.removeFilter(item)
-                        : exploreBloc.addFilter(item);
+                    if (!exploreBloc.isSelectedFilter(item['id'])) {
+                      exploreBloc.addFilter(item);
+                    }
                   });
                 },
               ),
@@ -147,15 +140,15 @@ class _FilterScreen extends State<FilterScreen> {
               FilterHorizontalList(
                 items: _releaseYears,
                 variant: FilterListVariantType.outlined,
-                selectedItemIndex: _selectedRealeseIndex,
+                selectedItemIndex: exploreBloc.getRealese(),
                 onPressed: (item, idx) {
                   //handleSelectCategory(idx);
                   setState(() {
-                    _selectedRealeseIndex = idx;
+                    exploreBloc.actulizarRealese(item['id']);
                     // Atualize o valor do índice selecionado
-                    exploreBloc.isSelectedFilter(idx)
-                        ? exploreBloc.removeFilter(item)
-                        : exploreBloc.addFilter(item);
+                   if (!exploreBloc.isSelectedFilter(item['id'])) {
+                      exploreBloc.addFilter(item);
+                    }
                   });
                 },
               ),
@@ -163,14 +156,14 @@ class _FilterScreen extends State<FilterScreen> {
               FilterHorizontalList(
                 items: _regions,
                 variant: FilterListVariantType.outlined,
-                selectedItemIndex: _selectedRegionsIndex,
+                selectedItemIndex: exploreBloc.getRegion(),
                 onPressed: (item, idx) {
                   //handleSelectCategory(idx);
                   setState(() {
-                    _selectedRegionsIndex = idx;
-                    exploreBloc.isSelectedFilter(idx)
-                        ? exploreBloc.removeFilter(item)
-                        : exploreBloc.addFilter(item);
+                    exploreBloc.actulizarRegion(item['id']);
+                    if (!exploreBloc.isSelectedFilter(item['id'])) {
+                      exploreBloc.addFilter(item);
+                    }
                   });
                 },
               ),

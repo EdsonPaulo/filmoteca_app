@@ -95,7 +95,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       onPressed: (item, idx) {
                         //handleSelectCategory(idx);
                         setState(() {
-                          exploreBloc.isSelectedFilter(idx)
+                          exploreBloc.isSelectedFilter(item['id'])
                               ? exploreBloc.removeFilter(item)
                               : exploreBloc.addFilter(item);
                         });

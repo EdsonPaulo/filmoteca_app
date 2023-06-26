@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<List<MovieModel>> _topRatedMovies;
   late Future<List<MovieModel>> _upcomingMovies;
 
-  int _selectedCategoryIndex = 0;
+  String _selectedCategoryIndex = '-1';
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void handleSelectCategory(int index) {
+  void handleSelectCategory(String index) {
     setState(() {
       _selectedCategoryIndex = index;
     });
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemRemovable: false,
               selectedItemIndex: _selectedCategoryIndex,
               onPressed: (item, idx) {
-                handleSelectCategory(idx);
+                handleSelectCategory(item['id']);
               },
             ),
             const SizedBox(height: 10),
