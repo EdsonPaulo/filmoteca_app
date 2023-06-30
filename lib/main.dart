@@ -46,8 +46,6 @@ class _FilmotecaAppState extends State<FilmotecaApp> {
   void initState() {
     super.initState();
     favoritesBloc.fetchDataFromApi();
-    exploreBloc.initFilters();
-    print("Favorite Screen Init");
   }
 
   @override

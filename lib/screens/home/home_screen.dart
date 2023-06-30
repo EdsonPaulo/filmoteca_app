@@ -1,5 +1,5 @@
 import 'package:filmoteca_app/data/category_data.dart';
-import 'package:filmoteca_app/models/category_model.dart';
+import 'package:filmoteca_app/models/filter_model.dart';
 import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/shared/widgets/custom_appbar.dart';
@@ -20,7 +20,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<CategoryModel> _categories = [];
+  final List<FilterModel> _categories = [
+    FilterModel(id: "-1", name: 'Tudo', type: FilterType.category),
+    ...getCategories().map(
+        (e) => FilterModel(id: e.id, name: e.name, type: FilterType.category))
+  ];
   late Future<List<MovieModel>> _popularMovies;
   late Future<List<MovieModel>> _newMovies;
   late Future<List<MovieModel>> _topRatedMovies;
@@ -33,8 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     setState(() {
-      _categories = [CategoryModel(id: "-1", name: 'Tudo'), ...getCategories()];
-
       _newMovies = fetchMovies('now_playing');
       _popularMovies = fetchMovies('popular');
       _topRatedMovies = fetchMovies('top_rated');
@@ -58,12 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             FilterHorizontalList(
-              items: _categories.map((category) => category.toJson()).toList(),
+              items: _categories,
               variant: FilterListVariantType.filled,
               itemRemovable: false,
-              selectedItemIndex: _selectedCategoryIndex,
+              selectedItems: const [],
               onPressed: (item, idx) {
-                handleSelectCategory(item['id']);
+                handleSelectCategory(item.id);
               },
             ),
             const SizedBox(height: 10),
