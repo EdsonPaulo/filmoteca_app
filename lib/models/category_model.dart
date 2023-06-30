@@ -1,5 +1,5 @@
 class CategoryModel {
-  int id;
+  String id;
   String name;
   String? imageUrl;
 

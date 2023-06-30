@@ -1,5 +1,7 @@
 import 'package:filmoteca_app/screens/auth/authentication_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:filmoteca_app/screens/explore/explore_bloc.dart';
+import 'package:filmoteca_app/screens/profile/language_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -29,8 +31,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   GetIt getIt = GetIt.instance;
+  GetIt getItEx = GetIt.instance;
+
   getIt.registerSingleton<FavoritesBloc>(FavoritesBloc());
   getIt.registerSingleton<AuthenticationBloc>(AuthenticationBloc());
+  getItEx.registerSingleton<ExploreBloc>(ExploreBloc());
   runApp(const FilmotecaApp());
 }
 
@@ -44,6 +49,7 @@ class FilmotecaApp extends StatefulWidget {
 class _FilmotecaAppState extends State<FilmotecaApp> {
   FavoritesBloc favoritesBloc = GetIt.instance<FavoritesBloc>();
   AuthenticationBloc authBloc = GetIt.instance<AuthenticationBloc>();
+  ExploreBloc exploreBloc = GetIt.instance<ExploreBloc>();
 
   @override
   void initState() {
@@ -56,6 +62,7 @@ class _FilmotecaAppState extends State<FilmotecaApp> {
   void dispose() {
     favoritesBloc.dispose();
     authBloc.dispose();
+    exploreBloc.dispose();
     super.dispose();
   }
 
@@ -77,6 +84,7 @@ class _FilmotecaAppState extends State<FilmotecaApp> {
           '/login': (context) => const LoginScreen(),
           '/register': (context) => const RegisterScreen(),
           '/filter': (context) => const FilterScreen(),
+          '/language':(context) => const LanguageScreen(),
           '/home': (context) => AppBottomTabsScreen(
                 children: const [
                   HomeScreen(),

@@ -1,8 +1,13 @@
+import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/screens/movie_details/media_tab.dart';
+import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailsTabs extends StatefulWidget {
-  const MovieDetailsTabs({super.key});
+  final MovieModel movie;
+
+  const MovieDetailsTabs(this.movie, {super.key});
 
   @override
   _MovieDetailsTabsState createState() => _MovieDetailsTabsState();
@@ -10,6 +15,14 @@ class MovieDetailsTabs extends StatefulWidget {
 
 class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
   int _selectedIndex = 0;
+  late Future<MovieModel> _movieFuture;
+  int _selectedMovie = 0;
+  @override
+  void initState() {
+    super.initState();
+    _movieFuture = fetchMovieById(widget.movie.id);
+    _selectedMovie = widget.movie.id;
+  }
 
   Widget _buildTab(String text, int index) {
     return Expanded(
@@ -38,34 +51,31 @@ class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
     );
   }
 
-  Widget _buildTabContent(int selectedIndex) {
+  Widget _buildTabContent(int selectedIndex, int _selectedMovie) {
     switch (selectedIndex) {
       case 0:
-        return Column(
-          children: const [
-            Text(
-              'Mídia',
-              style: TextStyle(color: Colors.white),
-            ),
-            Text(
-              'Mídia',
-              style: TextStyle(color: Colors.white),
-            ),
-          ],
-        );
+        return MediaTab(_selectedMovie);
       case 1:
-        return const Text(
-          'Comentários',
-          style: TextStyle(color: Colors.white),
-        );
+        return commentSetion();
       case 2:
-        return const Text(
-          'Sugestões',
-          style: TextStyle(color: Colors.white),
-        );
+        return suggestionsSetion();
       default:
         return Container();
     }
+  }
+
+  Widget commentSetion() {
+    return const Text(
+      'Comentários 12',
+      style: TextStyle(color: Colors.white),
+    );
+  }
+
+  Widget suggestionsSetion() {
+    return const Text(
+      'Sugestões',
+      style: TextStyle(color: Colors.white),
+    );
   }
 
   double _calculateBorderPosition(int selectedIndex) {
@@ -111,9 +121,9 @@ class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
         IndexedStack(
           index: _selectedIndex,
           children: [
-            _buildTabContent(0),
-            _buildTabContent(1),
-            _buildTabContent(2),
+            _buildTabContent(0, _selectedMovie),
+            _buildTabContent(1, _selectedMovie),
+            _buildTabContent(2, _selectedMovie),
           ],
         ),
       ],
