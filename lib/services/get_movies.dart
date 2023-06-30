@@ -34,7 +34,7 @@ Future<MovieModel> fetchMovieById(int movieId) async {
 }
 
 Future<List<MovieModel>> fetchMoviesByCategoryId({
-  required int categoryId,
+  required String categoryId,
   required String sortBy,
 }) async {
   String apiUrl =
