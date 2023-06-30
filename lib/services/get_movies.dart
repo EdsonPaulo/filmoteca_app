@@ -50,3 +50,20 @@ Future<List<MovieModel>> fetchMoviesByCategoryId({
     throw Exception('Não foi possível buscar os filmes');
   }
 }
+
+Future<List<MovieTrailerModel>> fetchVideosByMovieId(
+    {required int movieId}) async {
+  final apiUrl =
+      'https://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey';
+
+  try {
+    final response = await http.get(Uri.parse(apiUrl));
+    List<dynamic> moviesJson = jsonDecode(response.body)['results'];
+    return moviesJson
+        .map((movie) => MovieTrailerModel.fromJson(movie))
+        .toList();
+  } catch (e) {
+    print('Erro ao buscar filmes: $e');
+    throw Exception('Não foi possível buscar os filmes');
+  }
+}
