@@ -81,7 +81,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 if (snapshot.hasData) {
                   List<FilterModel> selectedFilters = snapshot.data!;
                   return Container(
-                      margin: const EdgeInsets.symmetric(vertical: 15),
+                      margin: EdgeInsets.symmetric(
+                          vertical: selectedFilters.isEmpty ? 0 : 15),
                       child: FilterHorizontalList(
                         items: selectedFilters,
                         selectedItems: selectedFilters,
