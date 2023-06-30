@@ -15,8 +15,7 @@ class ExploreBloc {
 
   void updateFilters(FilterModel filter) {
     if (hasSelectedFilterType(filter)) {
-      _filterList.removeWhere(
-          (item) => item.type == filter.type && item.id == filter.id);
+      _filterList.removeWhere((item) => item.id == filter.id);
     } else {
       _filterList.add(filter);
     }
