@@ -1,3 +1,4 @@
+import 'package:filmoteca_app/models/filter_model.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/utils/string_helpers.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,18 +7,18 @@ import 'package:flutter/material.dart';
 enum FilterListVariantType { outlined, filled }
 
 class FilterHorizontalList extends StatelessWidget {
-  final List<Map<String, dynamic>> items;
+  final List<FilterModel> items;
+  final List<FilterModel> selectedItems;
   final FilterListVariantType variant;
-  final Function(Map<String, dynamic>, int index) onPressed;
+  final Function(FilterModel, int index) onPressed;
   final bool itemRemovable;
-  final String selectedItemIndex;
 
   const FilterHorizontalList({
     super.key,
     required this.items,
+    required this.selectedItems,
     required this.onPressed,
     this.itemRemovable = false,
-    this.selectedItemIndex = '',
     this.variant = FilterListVariantType.filled,
   });
 
@@ -38,13 +39,14 @@ class FilterHorizontalList extends StatelessWidget {
                       onPressed(items[index], index);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          (items[index]['id'] == selectedItemIndex ||
-                                  itemRemovable)
-                              ? AppColors.primaryColor
-                              : variant == FilterListVariantType.filled
-                                  ? AppColors.darkSecondaryColor
-                                  : Colors.transparent,
+                      backgroundColor: (selectedItems.any((el) =>
+                                  el.id == items[index].id &&
+                                  el.type == items[index].type) ||
+                              itemRemovable)
+                          ? AppColors.primaryColor
+                          : variant == FilterListVariantType.filled
+                              ? AppColors.darkSecondaryColor
+                              : Colors.transparent,
                       minimumSize: const Size(70, 35.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
@@ -61,7 +63,7 @@ class FilterHorizontalList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          capitalizeText(items[index]['name']),
+                          capitalizeText(items[index].name),
                           style: const TextStyle(
                               fontSize: 14.0,
                               color: Colors.white,
