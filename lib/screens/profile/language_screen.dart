@@ -38,6 +38,8 @@ class _LanguageScreen extends State<LanguageScreen> {
 //Loading Language value on start
   Future<void> _loadLanguage() async {
     prefs = await SharedPreferences.getInstance();
+    print('Lingua inicial: ${prefs.getString('selectedLanguage')}');
+    // atualizar no BLOC
     setState(() {
       _selectedLanguage = prefs.getString('selectedLanguage');
     });
