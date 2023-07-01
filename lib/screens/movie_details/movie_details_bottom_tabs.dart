@@ -1,6 +1,7 @@
 import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/screens/movie_details/comment_tab.dart';
 import 'package:filmoteca_app/screens/movie_details/media_tab.dart';
+import 'package:filmoteca_app/screens/movie_details/suggestions_tab.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -59,17 +60,10 @@ class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
       case 1:
         return CommentTab();
       case 2:
-        return suggestionsSetion();
+        return SuggestionsTab();
       default:
         return Container();
     }
-  }
-
-  Widget suggestionsSetion() {
-    return const Text(
-      'Sugestões',
-      style: TextStyle(color: Colors.white),
-    );
   }
 
   double _calculateBorderPosition(int selectedIndex) {
