@@ -188,7 +188,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                               .removeFromFavorites(movie)
                                           : favoritesBloc.addToFavorites(movie);
                                     });
-                                    print("Favoritado");
                                   },
                                 )
                               ],

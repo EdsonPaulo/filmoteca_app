@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:filmoteca_app/models/user_model.dart';
 import 'package:filmoteca_app/screens/auth/authentication_bloc.dart';
 import 'package:filmoteca_app/services/users.dart';
@@ -5,10 +6,10 @@ import 'package:filmoteca_app/shared/widgets/custom_text_form_field.dart';
 import 'package:filmoteca_app/utils/app_toasts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/shared/widgets/custom_button.dart';
-import 'package:get_it/get_it.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,6 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool isSubmiting = false;
+
   @override
   void initState() {
     super.initState();
@@ -32,7 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _authBloc.dispose();
     super.dispose();
   }
 
@@ -42,18 +44,27 @@ class _LoginScreenState extends State<LoginScreen> {
       String password = _passwordController.text;
 
       try {
-        UserModel? user = await firebaseSignIn(email, password);
+        setState(() {
+          isSubmiting = true;
+        });
+
+        UserModel? user = await firebaseSignIn(
+          email: email,
+          password: password,
+        );
+
         if (user != null) {
           _authBloc.setUserData(user);
           _emailController.clear();
           _passwordController.clear();
-          // ignore: use_build_context_synchronously
+
           showToast(
               context: context,
               message: 'Sessão Iniciada com sucesso!',
               type: ToastType.success);
+
+          Navigator.pushNamed(context, '/home');
         } else {
-          // ignore: use_build_context_synchronously
           showToast(
               context: context,
               message: 'Ocorreu um erro ao iniciar sessão',
@@ -62,11 +73,13 @@ class _LoginScreenState extends State<LoginScreen> {
       } catch (e) {
         showToast(
             context: context,
-            message: 'Email ou Palavra-passe incorreta',
+            message: 'Email ou Palavra-passe incorreta! \n$e',
             type: ToastType.danger);
+      } finally {
+        setState(() {
+          isSubmiting = false;
+        });
       }
-
-      ///Navigator.pushNamed(context, '/home');
     }
   }
 
@@ -106,12 +119,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       label: 'Email',
                       leftIcon: CupertinoIcons.mail,
                       controller: _emailController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Por favor, digite seu e-mail';
-                        }
-                        return null;
-                      },
+                      validator: (value) => value!.isEmpty
+                          ? 'Por favor, digite seu e-mail'
+                          : null,
                     ),
                     const SizedBox(height: 15),
                     CustomTextFormField(
@@ -119,17 +129,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       label: 'Palavra-Passe',
                       leftIcon: Icons.lock_outline,
                       controller: _passwordController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Por favor, digite a sua palavra-passe';
-                        }
-                        return null;
-                      },
+                      validator: (value) => value!.isEmpty
+                          ? 'Por favor, digite a sua palavra-passe'
+                          : null,
                     ),
                     const SizedBox(height: 20),
                     CustomButton(
-                        label: 'Entrar',
-                        onPressed: () => _submitLogin(context)),
+                      label: 'Entrar',
+                      loading: isSubmiting,
+                      onPressed: () => _submitLogin(context),
+                    ),
                     const SizedBox(height: 70),
                     GestureDetector(
                         onTap: () {
@@ -143,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style:
                                   TextStyle(fontSize: 16, color: Colors.white),
                             ),
-                            SizedBox(width: 5), // espaço entre os dois textos
+                            SizedBox(width: 5),
                             Text(
                               'Criar Conta',
                               style:

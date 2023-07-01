@@ -40,7 +40,10 @@ Future<UserModel?> _userFromFirebase(User? user) async {
   return usarModel;
 }
 
-Future<UserModel?> firebaseSignIn(String email, String password) async {
+Future<UserModel?> firebaseSignIn({
+  required String email,
+  required String password,
+}) async {
   try {
     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
       email: email,
@@ -52,11 +55,11 @@ Future<UserModel?> firebaseSignIn(String email, String password) async {
   }
 }
 
-Future<UserModel?> firebaseSignUp(
-  String name,
-  String email,
-  String password,
-) async {
+Future<UserModel?> firebaseSignUp({
+  required String name,
+  required String email,
+  required String password,
+}) async {
   User? user;
   try {
     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
@@ -64,17 +67,29 @@ Future<UserModel?> firebaseSignUp(
 
     user = userCredential.user;
     if (user != null) {
-      print('Usuário registrado com sucesso: ${user.email}');
       await _firestore.collection('users').doc(user.uid).set({
         'name': name,
+        'email': email,
       });
       return _userFromFirebase(user);
     }
   } on FirebaseAuthException catch (e) {
-    print('Falha ao criar usuário: $e');
-    throw Exception(e);
+    if (e.code == 'weak-password') {
+      throw Exception('A senha fornecida é muito fraca.');
+    } else if (e.code == 'email-already-in-use') {
+      throw Exception('Já existe uma conta com o e-mail fornecido.');
+    } else {
+      throw Exception('Ocorreu um erro: $e');
+    }
   } on FirebaseException catch (e) {
-    print('Falha ao salvar dados: $e');
+    if (e.code == 'permission-denied') {
+      throw Exception(
+          'O usuário não tem permissões suficientes para escrever neste documento.');
+    } else if (e.code == 'unavailable') {
+      throw Exception('O serviço Firestore está atualmente indisponível.');
+    } else {
+      throw Exception('Falha ao salvar dados: $e');
+    }
   }
   return user as UserModel;
 }

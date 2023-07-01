@@ -1,3 +1,4 @@
+import 'package:filmoteca_app/screens/auth/auth_check_screen.dart';
 import 'package:filmoteca_app/screens/auth/authentication_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:filmoteca_app/screens/explore/explore_bloc.dart';
@@ -7,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:filmoteca_app/screens/welcome/onboarding_screen.dart';
-import 'package:filmoteca_app/screens/welcome/splash_screen.dart';
 import 'package:filmoteca_app/screens/welcome/welcome_screen.dart';
 import 'package:filmoteca_app/screens/auth/login_screen.dart';
 import 'package:filmoteca_app/screens/auth/register_screen.dart';
@@ -31,11 +31,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   GetIt getIt = GetIt.instance;
-  GetIt getItEx = GetIt.instance;
 
   getIt.registerSingleton<FavoritesBloc>(FavoritesBloc());
   getIt.registerSingleton<AuthenticationBloc>(AuthenticationBloc());
-  getItEx.registerSingleton<ExploreBloc>(ExploreBloc());
+  getIt.registerSingleton<ExploreBloc>(ExploreBloc());
   runApp(const FilmotecaApp());
 }
 
@@ -69,7 +68,7 @@ class _FilmotecaAppState extends State<FilmotecaApp> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light, // status bar wiht light style
+      value: SystemUiOverlayStyle.light,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Filmoteca',
@@ -77,14 +76,14 @@ class _FilmotecaAppState extends State<FilmotecaApp> {
           primarySwatch: Colors.green,
           fontFamily: 'RobotoSlab',
         ),
-        home: const SplashScreen(),
+        home: const AuthCheckScreen(),
         routes: {
           '/onboarding': (context) => const OnboardingScreen(),
           '/welcome': (context) => const WelcomeScreen(),
           '/login': (context) => const LoginScreen(),
           '/register': (context) => const RegisterScreen(),
           '/filter': (context) => const FilterScreen(),
-          '/language':(context) => const LanguageScreen(),
+          '/language': (context) => const LanguageScreen(),
           '/home': (context) => AppBottomTabsScreen(
                 children: const [
                   HomeScreen(),

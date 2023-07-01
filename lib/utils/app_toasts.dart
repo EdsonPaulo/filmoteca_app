@@ -11,10 +11,10 @@ void showToast({
 
   switch (type) {
     case ToastType.success:
-      backgroundColor = Colors.greenAccent;
+      backgroundColor = Colors.green;
       break;
     case ToastType.danger:
-      backgroundColor = Colors.redAccent;
+      backgroundColor = Colors.red;
       break;
     case ToastType.info:
       backgroundColor = Colors.blueAccent;

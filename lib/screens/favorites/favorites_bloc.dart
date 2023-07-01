@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
+import 'package:rxdart/rxdart.dart';
 
 class FavoritesBloc {
-  final _favoritesController = StreamController<List<MovieModel>>();
+  final _favoritesController = BehaviorSubject<List<MovieModel>>();
   Stream<List<MovieModel>> get favorites => _favoritesController.stream;
 
   List<MovieModel> _favoriteList = [];
@@ -12,7 +13,7 @@ class FavoritesBloc {
     try {
       List<MovieModel> apiData = await fetchMovies('now_playing');
       _favoriteList = apiData.sublist(0, 2);
-      _favoritesController.sink.add(List<MovieModel>.from(_favoriteList));
+      _favoritesController.add(List<MovieModel>.from(_favoriteList));
     } catch (e) {
       print('fetchDataFromApi: $e');
     }
@@ -21,13 +22,13 @@ class FavoritesBloc {
   void addToFavorites(MovieModel movie) {
     if (!isFavoriteMovie(movie.id)) {
       _favoriteList.add(movie);
-      _favoritesController.sink.add(List<MovieModel>.from(_favoriteList));
+      _favoritesController.add(List<MovieModel>.from(_favoriteList));
     }
   }
 
   void removeFromFavorites(MovieModel movie) {
     _favoriteList.removeWhere((element) => element.id == movie.id);
-    _favoritesController.sink.add(List<MovieModel>.from(_favoriteList));
+    _favoritesController.add(List<MovieModel>.from(_favoriteList));
   }
 
   bool isFavoriteMovie(int movieId) {

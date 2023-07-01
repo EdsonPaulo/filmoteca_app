@@ -5,6 +5,7 @@ enum ButtonVariantType { primary, secondary }
 
 class CustomButton extends StatelessWidget {
   final String label;
+  final bool loading;
   final ButtonVariantType variant;
   final VoidCallback onPressed;
 
@@ -12,13 +13,14 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.label,
     required this.onPressed,
+    this.loading = false,
     this.variant = ButtonVariantType.primary,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: loading ? null : onPressed,
       style: ElevatedButton.styleFrom(
         elevation: 4.0,
         backgroundColor: variant == ButtonVariantType.secondary
@@ -30,16 +32,25 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(50.0),
         ),
       ),
-      child: Text(
-        label,
-        style: TextStyle(
-          fontSize: 18.0,
-          color: variant == ButtonVariantType.secondary
-              ? AppColors.primaryColor
-              : Colors.white,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
+      child: loading
+          ? const SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(
+                color: AppColors.primaryColor,
+                strokeWidth: 3,
+              ),
+            )
+          : Text(
+              label,
+              style: TextStyle(
+                fontSize: 18.0,
+                color: variant == ButtonVariantType.secondary
+                    ? AppColors.primaryColor
+                    : Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
     );
   }
 }

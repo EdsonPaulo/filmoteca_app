@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +13,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, '/onboarding');
-    });
   }
 
   @override
