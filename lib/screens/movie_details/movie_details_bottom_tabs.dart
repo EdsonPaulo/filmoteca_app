@@ -1,4 +1,5 @@
 import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/screens/movie_details/comment_tab.dart';
 import 'package:filmoteca_app/screens/movie_details/media_tab.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
@@ -56,19 +57,12 @@ class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
       case 0:
         return MediaTab(_selectedMovie);
       case 1:
-        return commentSetion();
+        return CommentTab();
       case 2:
         return suggestionsSetion();
       default:
         return Container();
     }
-  }
-
-  Widget commentSetion() {
-    return const Text(
-      'Comentários 12',
-      style: TextStyle(color: Colors.white),
-    );
   }
 
   Widget suggestionsSetion() {
