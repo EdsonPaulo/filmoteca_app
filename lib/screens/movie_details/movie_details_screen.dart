@@ -188,7 +188,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                               .removeFromFavorites(movie)
                                           : favoritesBloc.addToFavorites(movie);
                                     });
-                                    print("Favoritado");
                                   },
                                 )
                               ],
@@ -230,7 +229,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                   fontWeight: FontWeight.w400),
                             ),
                             const SizedBox(height: 15),
-                            const MovieDetailsTabs(),
+                            MovieDetailsTabs(movie),
                           ],
                         ),
                       ),
