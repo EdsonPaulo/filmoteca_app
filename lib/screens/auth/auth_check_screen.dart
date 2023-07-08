@@ -22,12 +22,6 @@ class _AuthCheckScreenState extends State<AuthCheckScreen> {
   final AuthenticationBloc _authBloc = GetIt.instance<AuthenticationBloc>();
 
   @override
-  void initState() {
-    super.initState();
-    _authBloc.getUserDataFromStorage();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return StreamBuilder<UserModel?>(
       stream: _authBloc.userDataStream,
