@@ -1,8 +1,10 @@
 import 'package:filmoteca_app/models/movie_model.dart';
+import 'package:filmoteca_app/screens/movie_details/media_tab_list.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MediaTab extends StatefulWidget {
   final int movieId;
@@ -14,74 +16,51 @@ class MediaTab extends StatefulWidget {
 }
 
 class _MediaTab extends State<MediaTab> {
-  late Future<List<MovieTrailerModel>> _movieVideoFuture;
+  late Future<List<List<MovieTrailerModel>>> _movieMedia;
 
   @override
   void initState() {
     super.initState();
-    _movieVideoFuture = fetchVideosByMovieId(movieId: widget.movieId);
+
+    _movieMedia = fetchMediaByMovieId(movieId: widget.movieId);
+  }
+
+  void _launchURL(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Não foi possível abrir o URL: $url';
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<MovieTrailerModel>>(
-      future: _movieVideoFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              'Ocorreu um erro no carregamento. \n${snapshot.error}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.redAccent, fontSize: 24),
-            ),
-          );
-        } else {
-          List<MovieTrailerModel> moviesVideos = snapshot.data!;
-          return SizedBox(
-            height: 400,
-            child: GridView.builder(
-              itemCount: moviesVideos.length,
-              itemBuilder: (BuildContext context, index) {
-                return Row(
-                  children: [
-                    Container(
-                      width: 115,
-                      height: 70,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: AppColors.darkSecondaryColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      moviesVideos[index].title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                );
-              },
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: MediaQuery.of(context).size.width /
-                    (50 * MediaQuery.of(context).devicePixelRatio),
-              ),
-            ),
-          );
-        }
-      },
-    );
+    return SizedBox(
+        height: 350,
+        child: FutureBuilder<List<List<MovieTrailerModel>>>(
+          future: _movieMedia,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  'Ocorreu um erro no carregamento. \n${snapshot.error}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.redAccent, fontSize: 24),
+                ),
+              );
+            } else {
+              List<List<MovieTrailerModel>> moviesVideos = snapshot.data!;
+              List<MovieTrailerModel> moviesImgList = moviesVideos[0];
+              List<MovieTrailerModel> moviesVidList = moviesVideos[1];
+
+              return MediaTabList(
+                moviesImgList: moviesImgList,
+                moviesVidList: moviesVidList,
+              );
+            }
+          },
+        ));
   }
 }

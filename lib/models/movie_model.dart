@@ -29,17 +29,21 @@ class MovieCastModel {
 /// MOVIE TRAILER
 class MovieTrailerModel {
   String title;
-  String? videoKey;
-  String? imgUrl;
+  String videoKey;
+  String imgUrl;
   String? videoUrl;
 
   MovieTrailerModel(
-      {required videoKey, required this.title, this.imgUrl, this.videoUrl});
+      {required this.videoKey,
+      required this.title,
+      required this.imgUrl,
+      this.videoUrl});
 
   factory MovieTrailerModel.fromJson(Map<String, dynamic> json) {
     return MovieTrailerModel(
       title: json['name'],
       videoKey: json['key'],
+      imgUrl: 'https://image.tmdb.org/t/p/w500${json['file_path']}',
     );
   }
 }

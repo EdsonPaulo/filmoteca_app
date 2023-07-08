@@ -64,6 +64,53 @@ Future<List<MovieTrailerModel>> fetchVideosByMovieId(
         .toList();
   } catch (e) {
     print('Erro ao buscar filmes: $e');
-    throw Exception('Não foi possível buscar os filmes');
+    throw Exception('Não foi possível buscar os videos do filme');
+  }
+}
+
+Future<List<MovieTrailerModel>> fetchImagesByMovieId(
+    {required int movieId}) async {
+  final apiUrl =
+      'https://api.themoviedb.org/3/movie/$movieId/images?api_key=$apiKey';
+
+  try {
+    final response = await http.get(Uri.parse(apiUrl));
+    List<dynamic> moviesJson = jsonDecode(response.body)['backdrops'];
+    return moviesJson
+        .map((movie) => MovieTrailerModel.fromJson(movie))
+        .toList();
+  } catch (e) {
+    print('Erro ao buscar filmes: $e');
+    throw Exception('Não foi possível buscar as imagens do filme');
+  }
+}
+
+Future<List<List<MovieTrailerModel>>> fetchMediaByMovieId(
+    {required int movieId}) async {
+  int limit = 6;
+  final apiUrlImg =
+      'https://api.themoviedb.org/3/movie/$movieId/images?api_key=$apiKey&limit=$limit';
+  final apiUrlVid =
+      'https://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey&limit=$limit';
+
+  try {
+    final responseImg = await http.get(Uri.parse(apiUrlImg));
+    List<dynamic>? moviesImgJson = jsonDecode(responseImg.body)['backdrops'];
+    List<MovieTrailerModel> moviesImgList = moviesImgJson
+            ?.map((movie) => MovieTrailerModel.fromJson(movie))
+            .toList() ??
+        [];
+
+    final responseVid = await http.get(Uri.parse(apiUrlVid));
+    List<dynamic>? moviesVidJson = jsonDecode(responseVid.body)['results'];
+    List<MovieTrailerModel> moviesVidList = moviesVidJson
+            ?.map((movie) => MovieTrailerModel.fromJson(movie))
+            .toList() ??
+        [];
+
+    return [moviesImgList, moviesVidList];
+  } catch (e) {
+    print('Erro ao buscar filmes: $e');
+    throw Exception('Não foi possível buscar a mídia');
   }
 }
