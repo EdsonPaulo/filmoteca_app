@@ -17,3 +17,15 @@ String formatDuration(int? durationInMinutes) {
 
   return '${hours}h ${minutes}m';
 }
+
+String getNameInitials(String? name) {
+  if (name == null) return '';
+  List<String> names = name.split(" ");
+  String initials = "";
+  for (String part in names) {
+    if (part.trim().isNotEmpty) {
+      initials = initials + part.trim()[0].toUpperCase();
+    }
+  }
+  return initials;
+}
