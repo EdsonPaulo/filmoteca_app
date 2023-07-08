@@ -1,6 +1,5 @@
 import 'package:filmoteca_app/screens/auth/auth_check_screen.dart';
 import 'package:filmoteca_app/screens/auth/authentication_bloc.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:filmoteca_app/screens/explore/explore_bloc.dart';
 import 'package:filmoteca_app/screens/profile/language_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +22,9 @@ import 'package:filmoteca_app/screens/favorites/favorites_screen.dart';
 import 'package:filmoteca_app/screens/explore/filter_screen.dart';
 import 'package:filmoteca_app/screens/movie_details/movie_details_screen.dart';
 import 'package:filmoteca_app/screens/profile/profile_screen.dart';
-import 'package:filmoteca_app/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   GetIt getIt = GetIt.instance;
 
   getIt.registerSingleton<FavoritesBloc>(FavoritesBloc());

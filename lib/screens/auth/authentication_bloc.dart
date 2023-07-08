@@ -3,7 +3,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:filmoteca_app/models/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +17,6 @@ class AuthenticationBloc {
 
   void logout() async {
     clearUserDataOnStorage();
-    await FirebaseAuth.instance.signOut();
     _userDataController.add(null);
   }
 
