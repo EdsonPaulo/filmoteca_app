@@ -1,15 +1,12 @@
 import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/screens/movie_details/media_tab_list.dart';
+import 'package:filmoteca_app/screens/movie_details/media_tab/media_tab_list.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
-import 'package:filmoteca_app/utils/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MediaTab extends StatefulWidget {
   final int movieId;
 
-  const MediaTab(this.movieId, {super.key});
+  const MediaTab({super.key, required this.movieId});
 
   @override
   _MediaTab createState() => _MediaTab();
@@ -21,16 +18,7 @@ class _MediaTab extends State<MediaTab> {
   @override
   void initState() {
     super.initState();
-
     _movieMedia = fetchMediaByMovieId(movieId: widget.movieId);
-  }
-
-  void _launchURL(Uri url) async {
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      throw 'Não foi possível abrir o URL: $url';
-    }
   }
 
   @override

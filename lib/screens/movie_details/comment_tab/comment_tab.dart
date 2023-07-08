@@ -1,12 +1,13 @@
-import 'package:filmoteca_app/screens/movie_details/comment_card.dart';
+import 'package:filmoteca_app/screens/movie_details/comment_tab/comment_card.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CommentTab extends StatefulWidget {
-  const CommentTab({super.key});
+  final int movieId;
+
+  const CommentTab({super.key, required this.movieId});
 
   @override
   _CommentTab createState() => _CommentTab();
@@ -75,7 +76,7 @@ class _CommentTab extends State<CommentTab> {
             child: IconButton(
                 iconSize: 24,
                 icon: const Icon(
-                  FlutterIcons.paper_plane_faw5s,
+                  CupertinoIcons.paperplane,
                   color: Colors.white,
                 ),
                 onPressed: () {

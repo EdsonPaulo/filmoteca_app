@@ -1,20 +1,30 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:filmoteca_app/utils/app_toasts.dart';
 
 class MediaTabList extends StatelessWidget {
   final List<MovieTrailerModel> moviesImgList;
   final List<MovieTrailerModel> moviesVidList;
 
-  MediaTabList(
-      {super.key, required this.moviesImgList, required this.moviesVidList});
-  void _launchURL(Uri url) async {
+  const MediaTabList({
+    super.key,
+    required this.moviesImgList,
+    required this.moviesVidList,
+  });
+
+  void _launchURL(Uri url, BuildContext context) async {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
-      throw 'Não foi possível abrir o URL: $url';
+      showToast(
+          context: context,
+          message: 'Não foi possível abrir o URL: $url',
+          type: ToastType.danger);
     }
   }
 
@@ -35,13 +45,13 @@ class MediaTabList extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   final videoUrl = Uri(
-                      scheme: 'https',
-                      host: 'youtube.com',
-                      path: '/watch',
-                      queryParameters: {'v': moviesVidList[index].videoKey});
+                    scheme: 'https',
+                    host: 'youtube.com',
+                    path: '/watch',
+                    queryParameters: {'v': moviesVidList[index].videoKey},
+                  );
 
-                  print(videoUrl);
-                  _launchURL(videoUrl);
+                  _launchURL(videoUrl, context);
                 },
                 child: Container(
                   width: 115,
@@ -62,9 +72,7 @@ class MediaTabList extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 10,
-              ),
+              const SizedBox(width: 10),
               Expanded(
                 child: Text(
                   moviesVidList[index].title,

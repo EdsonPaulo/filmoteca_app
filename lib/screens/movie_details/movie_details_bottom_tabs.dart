@@ -1,7 +1,7 @@
 import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/screens/movie_details/comment_tab.dart';
-import 'package:filmoteca_app/screens/movie_details/media_tab.dart';
-import 'package:filmoteca_app/screens/movie_details/suggestions_tab.dart';
+import 'package:filmoteca_app/screens/movie_details/comment_tab/comment_tab.dart';
+import 'package:filmoteca_app/screens/movie_details/media_tab/media_tab.dart';
+import 'package:filmoteca_app/screens/movie_details/suggestions_tab/suggestions_tab.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +18,11 @@ class MovieDetailsTabs extends StatefulWidget {
 class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
   int _selectedIndex = 0;
   late Future<MovieModel> _movieFuture;
-  int _selectedMovie = 0;
+
   @override
   void initState() {
     super.initState();
     _movieFuture = fetchMovieById(widget.movie.id);
-    _selectedMovie = widget.movie.id;
   }
 
   Widget _buildTab(String text, int index) {
@@ -53,14 +52,14 @@ class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
     );
   }
 
-  Widget _buildTabContent(int selectedIndex, int _selectedMovie) {
+  Widget _buildTabContent(int selectedIndex) {
     switch (selectedIndex) {
       case 0:
-        return MediaTab(_selectedMovie);
+        return MediaTab(movieId: widget.movie.id);
       case 1:
-        return CommentTab();
+        return CommentTab(movieId: widget.movie.id);
       case 2:
-        return SuggestionsTab();
+        return SuggestionsTab(movieId: widget.movie.id);
       default:
         return Container();
     }
@@ -80,7 +79,7 @@ class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildTab('Vídeos/Imagens', 0),
+                _buildTab('Vídeos', 0),
                 _buildTab('Comentários', 1),
                 _buildTab('Sugestões', 2),
               ],
@@ -109,9 +108,9 @@ class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
         IndexedStack(
           index: _selectedIndex,
           children: [
-            _buildTabContent(0, _selectedMovie),
-            _buildTabContent(1, _selectedMovie),
-            _buildTabContent(2, _selectedMovie),
+            _buildTabContent(0),
+            _buildTabContent(1),
+            _buildTabContent(2),
           ],
         ),
       ],
