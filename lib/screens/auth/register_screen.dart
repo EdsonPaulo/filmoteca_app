@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           isSubmiting = true;
         });
 
-        UserModel? user = await firebaseSignUp(
+        UserModel? user = await postSignUp(
           name: name,
           email: email,
           password: password,

@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SuggestionsTab extends StatefulWidget {
-  const SuggestionsTab({super.key});
+  final int movieId;
+
+  const SuggestionsTab({super.key, required this.movieId});
 
   @override
   _SuggestionsTab createState() => _SuggestionsTab();

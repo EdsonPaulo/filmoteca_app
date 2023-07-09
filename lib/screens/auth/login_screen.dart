@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
           isSubmiting = true;
         });
 
-        UserModel? user = await firebaseSignIn(
+        UserModel? user = await postSignIn(
           email: email,
           password: password,
         );
