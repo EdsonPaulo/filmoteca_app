@@ -1,14 +1,14 @@
 import 'package:filmoteca_app/models/movie_model.dart';
 
 class UserModel {
-  String uid;
+  String id;
   String name;
   String email;
   String? photoUrl;
   List<MovieModel>? favorites;
 
   UserModel({
-    required this.uid,
+    required this.id,
     required this.name,
     required this.email,
     this.favorites,
@@ -17,7 +17,7 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'uid': uid,
+      'id': id,
       'name': name,
       'email': email,
       'photoUrl': photoUrl,
@@ -27,7 +27,7 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      uid: json['uid'] as String,
+      id: json['id'] as String,
       name: json['name'] as String,
       email: json['email'] as String,
       photoUrl: json['photoUrl'] as String?,
