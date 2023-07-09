@@ -19,8 +19,10 @@ Future<UserModel?> postSignIn({
 
     print(jsonDecode(response.body));
     return UserModel.fromJson(jsonDecode(response.body)['data']);
+  } on http.ClientException catch (e) {
+    throw Exception(e.message);
   } catch (e) {
-    print(e);
+    print(e.toString());
     throw Exception(e);
   }
 }
@@ -41,6 +43,8 @@ Future<UserModel?> postSignUp({
 
     print(jsonDecode(response.body));
     return UserModel.fromJson(jsonDecode(response.body)['data']);
+  } on http.ClientException catch (e) {
+    throw Exception(e.message);
   } catch (e) {
     print(e.toString());
     throw Exception(e);
