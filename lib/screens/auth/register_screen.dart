@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:filmoteca_app/models/user_model.dart';
+import 'package:filmoteca_app/services/users.dart';
 import 'package:filmoteca_app/shared/widgets/custom_text_form_field.dart';
 import 'package:filmoteca_app/utils/app_toasts.dart';
 import 'package:filmoteca_app/utils/validators.dart';
@@ -50,14 +51,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           isSubmiting = true;
         });
 
-        UserModel? user;
-        /**
-         *  = await firebaseSignUp(
+        UserModel? user = await postSignUp(
           name: name,
           email: email,
           password: password,
         );
-       */
 
         if (user != null) {
           _nameController.clear();

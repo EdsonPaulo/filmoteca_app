@@ -48,13 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
           isSubmiting = true;
         });
 
-        UserModel? user;
-        /* await firebaseSignIn(
+        UserModel? user = await postSignIn(
           email: email,
           password: password,
-        )*/
-        //TODO: REMOVE WHEN LOGIN API READY
-        Navigator.pushNamed(context, '/home');
+        );
 
         if (user != null) {
           _authBloc.setUserData(user);
