@@ -17,8 +17,14 @@ Future<UserModel?> postSignIn({
           'password': password,
         }));
 
-    print('postSignIn response ${jsonDecode(response.body)}');
-    return UserModel.fromJson(jsonDecode(response.body)['data']);
+    dynamic decodedResponse = jsonDecode(response.body);
+    print('postSignIn response $decodedResponse');
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return UserModel.fromJson(jsonDecode(response.body)['data']);
+    } else {
+      throw http.ClientException(
+          decodedResponse['message'] ?? 'Ocorreu um erro!');
+    }
   } on http.ClientException catch (e) {
     throw Exception(e.message);
   } catch (e) {
@@ -41,8 +47,14 @@ Future<UserModel?> postSignUp({
           'password': password,
         }));
 
-    print('postSignUp response ${jsonDecode(response.body)}');
-    return UserModel.fromJson(jsonDecode(response.body)['data']);
+    dynamic decodedResponse = jsonDecode(response.body);
+    print(decodedResponse['message']);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return UserModel.fromJson(jsonDecode(response.body)['data']);
+    } else {
+      throw http.ClientException(
+          decodedResponse['message'] ?? 'Ocorreu um erro!');
+    }
   } on http.ClientException catch (e) {
     throw Exception(e.message);
   } catch (e) {

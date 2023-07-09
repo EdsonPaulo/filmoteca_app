@@ -6,6 +6,7 @@ import 'package:filmoteca_app/utils/app_toasts.dart';
 import 'package:filmoteca_app/utils/validators.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/shared/widgets/custom_button.dart';
@@ -74,8 +75,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               message: 'Ocorreu um erro ao criar conta',
               type: ToastType.danger);
         }
+      } on http.ClientException catch (e) {
+        showToast(context: context, message: e.message, type: ToastType.danger);
       } catch (e) {
-        print(e);
         showToast(
           context: context,
           message: e.toString(),
