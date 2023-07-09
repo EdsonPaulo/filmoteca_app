@@ -17,7 +17,7 @@ Future<UserModel?> postSignIn({
           'password': password,
         }));
 
-    print(jsonDecode(response.body));
+    print('postSignIn response ${jsonDecode(response.body)}');
     return UserModel.fromJson(jsonDecode(response.body)['data']);
   } on http.ClientException catch (e) {
     throw Exception(e.message);
@@ -41,7 +41,7 @@ Future<UserModel?> postSignUp({
           'password': password,
         }));
 
-    print(jsonDecode(response.body));
+    print('postSignUp response ${jsonDecode(response.body)}');
     return UserModel.fromJson(jsonDecode(response.body)['data']);
   } on http.ClientException catch (e) {
     throw Exception(e.message);
