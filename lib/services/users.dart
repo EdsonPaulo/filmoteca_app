@@ -3,22 +3,32 @@ import 'package:http/http.dart' as http;
 
 import 'package:filmoteca_app/models/user_model.dart';
 
-const API_URL = 'https://filmoteca.onrender.com';
+const String apiUrl = 'https://filmoteca.onrender.com';
 
 Future<UserModel?> postSignIn({
   required String email,
   required String password,
 }) async {
   try {
-    final response =
-        await http.post(Uri.parse('$API_URL/sign_in'), headers: {}, body: {
-      'email': email,
-      'password': password,
-    });
-    print(jsonDecode(response.body));
-    return jsonDecode(response.body)['data'] as UserModel;
+    final response = await http.post(Uri.parse('$apiUrl/auth/sign_in'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+        }));
+
+    dynamic decodedResponse = jsonDecode(response.body);
+    print('postSignIn response $decodedResponse');
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return UserModel.fromJson(jsonDecode(response.body)['data']);
+    } else {
+      throw http.ClientException(
+          decodedResponse['message'] ?? 'Ocorreu um erro!');
+    }
+  } on http.ClientException catch (e) {
+    throw Exception(e.message);
   } catch (e) {
-    print(e);
+    print(e.toString());
     throw Exception(e);
   }
 }
@@ -29,16 +39,26 @@ Future<UserModel?> postSignUp({
   required String password,
 }) async {
   try {
-    final response =
-        await http.post(Uri.parse('$API_URL/sign_up'), headers: {}, body: {
-      'name': name,
-      'email': email,
-      'password': password,
-    });
-    print(jsonDecode(response.body));
-    return jsonDecode(response.body)['data'] as UserModel;
+    final response = await http.post(Uri.parse('$apiUrl/auth/sign_up'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'name': name,
+          'email': email,
+          'password': password,
+        }));
+
+    dynamic decodedResponse = jsonDecode(response.body);
+    print(decodedResponse['message']);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return UserModel.fromJson(jsonDecode(response.body)['data']);
+    } else {
+      throw http.ClientException(
+          decodedResponse['message'] ?? 'Ocorreu um erro!');
+    }
+  } on http.ClientException catch (e) {
+    throw Exception(e.message);
   } catch (e) {
-    print(e);
+    print(e.toString());
     throw Exception(e);
   }
 }
