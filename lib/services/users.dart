@@ -18,7 +18,7 @@ Future<UserModel?> postSignIn({
         }));
 
     dynamic decodedResponse = jsonDecode(response.body);
-    print('postSignIn response $decodedResponse');
+
     if (response.statusCode == 200 || response.statusCode == 201) {
       return UserModel.fromJson(jsonDecode(response.body)['data']);
     } else {
@@ -48,7 +48,7 @@ Future<UserModel?> postSignUp({
         }));
 
     dynamic decodedResponse = jsonDecode(response.body);
-    print(decodedResponse['message']);
+
     if (response.statusCode == 200 || response.statusCode == 201) {
       return UserModel.fromJson(jsonDecode(response.body)['data']);
     } else {
