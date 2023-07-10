@@ -7,7 +7,6 @@ import 'package:filmoteca_app/utils/app_toasts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
 
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/shared/widgets/custom_button.dart';
@@ -71,13 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
               message: 'Ocorreu um erro ao iniciar sessão',
               type: ToastType.danger);
         }
-      } on http.ClientException catch (e) {
-        showToast(context: context, message: e.message, type: ToastType.danger);
       } catch (e) {
-        showToast(
-            context: context,
-            message: 'Email ou Palavra-passe incorreta! \n$e',
-            type: ToastType.danger);
+        showToast(context: context, message: '$e', type: ToastType.danger);
       } finally {
         setState(() {
           isSubmiting = false;

@@ -26,8 +26,6 @@ class _AuthCheckScreenState extends State<AuthCheckScreen> {
     return StreamBuilder<UserModel?>(
       stream: _authBloc.userDataStream,
       builder: (BuildContext context, AsyncSnapshot<UserModel?> snapshot) {
-        print(snapshot.toString());
-        print(snapshot.data);
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData && snapshot.data != null) {
             return AppBottomTabsScreen(
