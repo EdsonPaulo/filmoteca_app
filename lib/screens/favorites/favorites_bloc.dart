@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/services/get_movies.dart';
+import 'package:filmoteca_app/services/favorites.dart';
 import 'package:rxdart/rxdart.dart';
 
 class FavoritesBloc {
@@ -11,11 +11,11 @@ class FavoritesBloc {
 
   void fetchDataFromApi() async {
     try {
-      List<MovieModel> apiData = await fetchMovies('now_playing');
-      _favoriteList = apiData.sublist(0, 2);
-      _favoritesController.add(List<MovieModel>.from(_favoriteList));
+      List<MovieModel> apiData = await getFavorites();
+      _favoriteList = apiData;
     } catch (e) {
-      print('fetchDataFromApi: $e');
+      _favoriteList = [];
+      print('fetchDataFromApi error: $e');
     }
   }
 
