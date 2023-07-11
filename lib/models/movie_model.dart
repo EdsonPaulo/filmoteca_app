@@ -1,6 +1,7 @@
 /// USER REVIEW
 class ReviewModel {
   int id;
+  int movieId;
   String userName;
   String? userImgUrl;
   String comment;
@@ -12,11 +13,21 @@ class ReviewModel {
     required this.id,
     required this.userName,
     required this.comment,
+    required this.movieId,
     this.rating = 0.0,
     this.userImgUrl,
     this.liked = false,
     this.likes = 0,
   });
+
+  factory ReviewModel.fromJson(Map<String, dynamic> json) {
+    return ReviewModel(
+      id: json['id'],
+      movieId: json['movie_id'],
+      userName: json['user'],
+      comment: json['comment'],
+    );
+  }
 }
 
 /// CAST / ELENCO
