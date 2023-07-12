@@ -20,17 +20,17 @@ Future<List<MovieModel>> getFavorites() async {
       },
     );
 
-    dynamic decodedResponse = jsonDecode(response.body);
+    List<dynamic> decodedResponse = jsonDecode(response.body)['data'];
 
     print('getFavorites response $decodedResponse');
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      return decodedResponse['data']
+      return decodedResponse
           .map((item) => MovieModel.fromJson(item['movie_data']))
           .toList();
     } else {
       throw http.ClientException(
-          decodedResponse['message'] ?? 'Ocorreu um erro!');
+          decodedResponse[0] ?? 'Ocorreu um erro!');
     }
   } on http.ClientException catch (e) {
     throw Exception(e.message);

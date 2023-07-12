@@ -94,12 +94,20 @@ class MovieModel {
     this.releaseDate = '',
     this.homepage = '',
   });
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'overview': synopsis,
+    };
+  }
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       id: json['id'],
       title: json['title'],
-      rating: json['vote_average'].toDouble(),
+      rating:
+          json['vote_average'] != null ? json['vote_average'].toDouble() : null,
       duration: json['runtime'],
       synopsis: json['overview'],
       releaseDate: json['release_date'],
