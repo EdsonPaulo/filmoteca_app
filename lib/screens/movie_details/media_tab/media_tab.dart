@@ -23,32 +23,30 @@ class _MediaTab extends State<MediaTab> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: 350,
-        child: FutureBuilder<List<List<MovieTrailerModel>>>(
-          future: _movieMedia,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  'Ocorreu um erro no carregamento. \n${snapshot.error}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.redAccent, fontSize: 24),
-                ),
-              );
-            } else {
-              List<List<MovieTrailerModel>> moviesVideos = snapshot.data!;
-              List<MovieTrailerModel> moviesImgList = moviesVideos[0];
-              List<MovieTrailerModel> moviesVidList = moviesVideos[1];
+    return FutureBuilder<List<List<MovieTrailerModel>>>(
+      future: _movieMedia,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              'Ocorreu um erro no carregamento. \n${snapshot.error}',
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.redAccent, fontSize: 24),
+            ),
+          );
+        } else {
+          List<List<MovieTrailerModel>> moviesVideos = snapshot.data!;
+          List<MovieTrailerModel> moviesImgList = moviesVideos[0];
+          List<MovieTrailerModel> moviesVidList = moviesVideos[1];
 
-              return MediaTabList(
-                moviesImgList: moviesImgList,
-                moviesVidList: moviesVidList,
-              );
-            }
-          },
-        ));
+          return MediaTabList(
+            moviesImgList: moviesImgList,
+            moviesVidList: moviesVidList,
+          );
+        }
+      },
+    );
   }
 }

@@ -3,29 +3,30 @@ class ReviewModel {
   int id;
   int movieId;
   String userName;
-  String? userImgUrl;
+  String? userEmail;
   String comment;
   double rating;
-  int likes;
-  bool liked;
+  String createdAt;
 
   ReviewModel({
     required this.id,
     required this.userName,
     required this.comment,
     required this.movieId,
+    this.userEmail,
     this.rating = 0.0,
-    this.userImgUrl,
-    this.liked = false,
-    this.likes = 0,
+    required this.createdAt,
   });
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) {
     return ReviewModel(
-      id: json['id'],
-      movieId: json['movie_id'],
-      userName: json['user'],
-      comment: json['comment'],
+      id: json['id'] as int,
+      movieId: json['movie_id'] as int,
+      userName: json['user_name'] as String,
+      userEmail: json['user_email'] as String,
+      comment: json['comment'] as String,
+      rating: json['rating'] as double,
+      createdAt: json['created_at'] as String,
     );
   }
 }

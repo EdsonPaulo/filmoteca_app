@@ -30,65 +30,61 @@ class MediaTabList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: moviesImgList.length < moviesVidList.length
-          ? moviesImgList.length
-          : moviesVidList.length,
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      padding: const EdgeInsets.symmetric(horizontal: 0),
-      itemBuilder: (BuildContext context, index) {
-        return Container(
-          margin: const EdgeInsets.only(bottom: 15),
-          child: Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  final videoUrl = Uri(
-                    scheme: 'https',
-                    host: 'youtube.com',
-                    path: '/watch',
-                    queryParameters: {'v': moviesVidList[index].videoKey},
-                  );
+    return Column(
+      children: [
+        ...moviesVidList.asMap().entries.take(5).map(
+              (item) => Container(
+                margin: const EdgeInsets.only(bottom: 15),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        final videoUrl = Uri(
+                          scheme: 'https',
+                          host: 'youtube.com',
+                          path: '/watch',
+                          queryParameters: {'v': item.value.videoKey},
+                        );
 
-                  _launchURL(videoUrl, context);
-                },
-                child: Container(
-                  width: 115,
-                  height: 70,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: AppColors.darkSecondaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                      image: NetworkImage(moviesImgList[index].imgUrl),
-                      fit: BoxFit.fill,
+                        _launchURL(videoUrl, context);
+                      },
+                      child: Container(
+                        width: 115,
+                        height: 70,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColors.darkSecondaryColor,
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: NetworkImage(moviesImgList[item.key].imgUrl),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        child: const Icon(
+                          CupertinoIcons.play_fill,
+                          size: 40,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
-                  ),
-                  child: const Icon(
-                    CupertinoIcons.play_fill,
-                    size: 40,
-                    color: Colors.white,
-                  ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        item.value.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  moviesVidList[index].title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+            ),
+      ],
     );
   }
 }

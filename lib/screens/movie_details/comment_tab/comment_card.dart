@@ -1,9 +1,13 @@
+import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
+import 'package:filmoteca_app/utils/string_helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CommentCard extends StatefulWidget {
-  const CommentCard({super.key});
+  final ReviewModel review;
+
+  const CommentCard({super.key, required this.review});
 
   @override
   _CommentCard createState() => _CommentCard();
@@ -12,72 +16,95 @@ class CommentCard extends StatefulWidget {
 class _CommentCard extends State<CommentCard> {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Row(
-        children: const [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: AppColors.primaryColor,
-            child: Text(''),
-          ),
-          SizedBox(
-            width: 5,
-          ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  foregroundColor: Colors.white,
+                  backgroundColor: AppColors.accentColor,
+                  child: Text(
+                    getNameInitials(widget.review.userName),
+                    style: const TextStyle(fontSize: 22),
+                  ),
+                ),
+                const SizedBox(width: 15),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.review.userName,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Text(
+                      widget.review.userEmail ?? '-',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.white70,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Icon(
+                  CupertinoIcons.star_fill,
+                  color: Colors.yellow,
+                  size: 12,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  '${widget.review.rating}',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 5),
+        if (widget.review.comment.isNotEmpty)
           Text(
-            'Estefan Bridge',
-            style: TextStyle(
+            widget.review.comment,
+            style: const TextStyle(
               fontSize: 14,
               color: Colors.white,
               fontWeight: FontWeight.w400,
             ),
           ),
-        ],
-      ),
-      const SizedBox(
-        height: 5,
-      ),
-      const Text(
-        'Lorem ipsum dolor sitiusu amet consectetur. Urna sagittis aliquam eget morbi arcu varius aliquam enim placerat.',
-        textAlign: TextAlign.justify,
-        style: TextStyle(
-          fontSize: 12,
-          color: Colors.white,
-          fontWeight: FontWeight.w400,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(),
+            Text(
+              widget.review.createdAt,
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.white,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
         ),
-      ),
-      Row(
-        children: [
-          IconButton(
-            icon: const Icon(
-              CupertinoIcons.heart,
-              color: AppColors.primaryColor,
-            ),
-            onPressed: () {},
-          ),
-          const Text(
-            '173',
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          const SizedBox(
-            width: 250,
-          ),
-          const Text(
-            '2 dias atrás',
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
-      ),
-      const SizedBox(
-        height: 25,
-      ),
-    ]);
+        const SizedBox(height: 25),
+      ],
+    );
   }
 }
