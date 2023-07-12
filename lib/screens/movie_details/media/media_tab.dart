@@ -1,5 +1,5 @@
 import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/screens/movie_details/media_tab/media_tab_list.dart';
+import 'package:filmoteca_app/screens/movie_details/media/media_tab_list.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:flutter/material.dart';
 
