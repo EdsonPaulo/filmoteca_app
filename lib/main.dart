@@ -49,7 +49,6 @@ class _FilmotecaAppState extends State<FilmotecaApp> {
   void initState() {
     super.initState();
     authBloc.getUserDataFromStorage();
-    favoritesBloc.getFavoritesFromStorage();
     favoritesBloc.fetchDataFromApi();
   }
 

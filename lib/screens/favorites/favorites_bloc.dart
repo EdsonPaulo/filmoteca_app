@@ -15,6 +15,7 @@ class FavoritesBloc {
   void fetchDataFromApi() async {
     try {
       List<MovieModel> apiData = await getFavorites();
+      print('fetchDataFromApi: $apiData');
       _favoriteList = apiData;
     } catch (e) {
       _favoriteList = [];
@@ -25,14 +26,14 @@ class FavoritesBloc {
   void addToFavorites(MovieModel movie) {
     if (!isFavoriteMovie(movie.id)) {
       _favoriteList.add(movie);
-      saveFavoritesDataOnStorage(_favoriteList);
+      postFavoritesFromApi(movie.id);
       _favoritesController.add(List<MovieModel>.from(_favoriteList));
-      //saveFavoritesDataOnStorage(_favoriteList);
     }
   }
 
   void removeFromFavorites(MovieModel movie) {
     _favoriteList.removeWhere((element) => element.id == movie.id);
+    deleteFavoriteFromApi(movie.id);
     _favoritesController.add(List<MovieModel>.from(_favoriteList));
   }
 
@@ -55,41 +56,12 @@ class FavoritesBloc {
     }
   }
 
-  void getFavoritesFromStorage() async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? movieDataJson =
-          prefs.getString(SharedPreferencesKeys.favoritesData);
-      print(
-          'oos filmes: ${prefs.getString(SharedPreferencesKeys.favoritesData)}');
-      if (movieDataJson != null) {
-        print('if');
-        dynamic decodedData = jsonDecode(movieDataJson);
+  void postFavoritesFromApi(int movieId) async {
+    postFavorite(movieId: movieId);
+  }
 
-        if (decodedData is List<dynamic>) {
-          List<MovieModel> movieData = decodedData
-              .map((movieMap) => MovieModel.fromJson(movieMap))
-              .toList();
-
-          print('lista $movieData');
-          _favoritesController.add(List<MovieModel>.from(movieData));
-        } else if (decodedData is Map<String, dynamic>) {
-          MovieModel movie = MovieModel.fromJson(decodedData);
-          _favoritesController.add([movie]);
-        } else {
-          print(
-              'Invalid data format. Expected a List<dynamic> or Map<String, dynamic>.');
-          // Handle the error or use a default value
-        }
-      } else {
-        print('else');
-
-        List<MovieModel> vazia = [];
-        _favoritesController.add(List<MovieModel>.from(vazia));
-      }
-    } catch (e) {
-      print(e);
-    }
+  void deleteFavoriteFromApi(int movieId) async {
+    deleteFavorite(movieId: movieId);
   }
 
   void dispose() {
