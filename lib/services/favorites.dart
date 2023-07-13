@@ -62,7 +62,7 @@ Future<void> deleteFavorite({required int movieId}) async {
     String? accessToken = prefs.getString(SharedPreferencesKeys.accessToken);
 
     await http.delete(
-      Uri.parse('$apiUrl/favorites/$movieId/'),
+      Uri.parse('$apiUrl/favorites/$movieId'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken'
