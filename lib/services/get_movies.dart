@@ -114,3 +114,16 @@ Future<List<List<MovieTrailerModel>>> fetchMediaByMovieId(
     throw Exception('Não foi possível buscar a mídia');
   }
 }
+
+Future<List<MovieModel>> fetchMovieRecommendations(int movieId) async {
+  String apiUrl =
+      'https://api.themoviedb.org/3/movie/$movieId/recommendations?language=pt-BR&api_key=$apiKey';
+  try {
+    final response = await http.get(Uri.parse(apiUrl));
+    List<dynamic> moviesJson = jsonDecode(response.body)['results'];
+    return moviesJson.map((movie) => MovieModel.fromJson(movie)).toList();
+  } catch (e) {
+    print('Erro ao buscar recomendações do filme: $e');
+    throw Exception('Filme não encontrado');
+  }
+}
