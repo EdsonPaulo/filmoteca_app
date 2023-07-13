@@ -44,6 +44,17 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<MovieModel> movies = snapshot.data!;
+                    if (movies.isEmpty) {
+                      return const Center(
+                        child: Text(
+                          'A tua lista de favoritos está vazia!',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 18,
+                          ),
+                        ),
+                      );
+                    }
                     return MoviesVerticalList(favoriteMovies: movies);
                   } else if (snapshot.hasError) {
                     return Center(

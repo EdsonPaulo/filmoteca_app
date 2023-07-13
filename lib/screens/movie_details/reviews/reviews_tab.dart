@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/screens/movie_details/comment_tab/comment_card.dart';
+import 'package:filmoteca_app/screens/movie_details/reviews/review_card.dart';
 import 'package:filmoteca_app/services/reviews.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:filmoteca_app/utils/app_toasts.dart';
@@ -9,36 +8,55 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class CommentTab extends StatefulWidget {
+class ReviewsTab extends StatefulWidget {
   final int movieId;
 
-  const CommentTab({super.key, required this.movieId});
+  const ReviewsTab({super.key, required this.movieId});
 
   @override
-  _CommentTab createState() => _CommentTab();
+  _ReviewsTab createState() => _ReviewsTab();
 }
 
-class _CommentTab extends State<CommentTab> {
+class _ReviewsTab extends State<ReviewsTab> {
   late Future<List<ReviewModel>> _movieReviews;
-  String comment = '';
+  final TextEditingController _commentController = TextEditingController();
   double rating = 0.0;
+  bool isSubmitButtonEnabled = false;
 
   @override
   void initState() {
     super.initState();
-    _movieReviews = fetchMovieReviews(movieId: widget.movieId);
+    setState(() {
+      _movieReviews = fetchMovieReviews(movieId: widget.movieId);
+    });
   }
 
   Future<void> _onSubmitReview(BuildContext context) async {
-    await postReview(
-      comment: comment,
-      movieId: widget.movieId,
-      rating: rating,
-    );
-    showToast(
-        context: context,
-        message: 'Avaliação enviada com sucesso!',
-        type: ToastType.success);
+    if (isSubmitButtonEnabled) {
+      try {
+        await postReview(
+          comment: _commentController.text,
+          movieId: widget.movieId,
+          rating: rating,
+        );
+        setState(() {
+          _movieReviews = fetchMovieReviews(movieId: widget.movieId);
+          _commentController.clear();
+          rating = 0;
+        });
+        showToast(
+          context: context,
+          message: 'Avaliação enviada com sucesso!',
+          type: ToastType.success,
+        );
+      } catch (e) {
+        showToast(
+          context: context,
+          message: 'Ocorreu um erro! $e',
+          type: ToastType.danger,
+        );
+      }
+    }
   }
 
   @override
@@ -47,7 +65,7 @@ class _CommentTab extends State<CommentTab> {
       children: [
         const SizedBox(height: 10),
         SizedBox(
-          height: 50,
+          height: 40,
           child: RatingBar(
             minRating: 0,
             maxRating: 5,
@@ -61,6 +79,7 @@ class _CommentTab extends State<CommentTab> {
             glowColor: Colors.amber,
             glowRadius: 5,
             glow: true,
+            itemSize: 30,
             itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
             ratingWidget: RatingWidget(
               full: const Icon(
@@ -83,9 +102,10 @@ class _CommentTab extends State<CommentTab> {
               child: TextField(
                 onChanged: (val) {
                   setState(() {
-                    comment = val;
+                    isSubmitButtonEnabled = val.isNotEmpty;
                   });
                 },
+                controller: _commentController,
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Deixe seu comentário...',
@@ -100,23 +120,28 @@ class _CommentTab extends State<CommentTab> {
             ),
             const SizedBox(width: 10),
             Material(
-              color: AppColors.primaryColor,
+              color: isSubmitButtonEnabled
+                  ? AppColors.primaryColor
+                  : Colors.blueGrey,
               borderRadius: BorderRadius.circular(50),
               child: InkWell(
-                onTap: () {
-                  _onSubmitReview(context);
-                },
+                onTap: isSubmitButtonEnabled
+                    ? () {
+                        _onSubmitReview(context);
+                      }
+                    : null,
                 borderRadius: BorderRadius.circular(50),
                 splashColor: Colors.greenAccent,
                 child: Container(
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(50)),
-                  child: const Padding(
-                    padding: EdgeInsets.all(14),
+                  child: Padding(
+                    padding: const EdgeInsets.all(14),
                     child: Icon(
                       CupertinoIcons.paperplane,
-                      color: Colors.white,
                       size: 24,
+                      color:
+                          isSubmitButtonEnabled ? Colors.white : Colors.white38,
                     ),
                   ),
                 ),
@@ -152,7 +177,7 @@ class _CommentTab extends State<CommentTab> {
                     ),
                   ),
                   const SizedBox(height: 25),
-                  ...reviews.map((r) => CommentCard(review: r)),
+                  ...reviews.map((r) => ReviewCard(review: r)),
                 ],
               );
             }

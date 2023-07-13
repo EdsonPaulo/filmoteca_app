@@ -4,16 +4,16 @@ import 'package:filmoteca_app/utils/string_helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CommentCard extends StatefulWidget {
+class ReviewCard extends StatefulWidget {
   final ReviewModel review;
 
-  const CommentCard({super.key, required this.review});
+  const ReviewCard({super.key, required this.review});
 
   @override
-  _CommentCard createState() => _CommentCard();
+  _ReviewCard createState() => _ReviewCard();
 }
 
-class _CommentCard extends State<CommentCard> {
+class _ReviewCard extends State<ReviewCard> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -63,14 +63,14 @@ class _CommentCard extends State<CommentCard> {
                 const Icon(
                   CupertinoIcons.star_fill,
                   color: Colors.yellow,
-                  size: 12,
+                  size: 15,
                 ),
                 const SizedBox(width: 5),
                 Text(
                   '${widget.review.rating}',
                   style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
+                    fontSize: 14,
+                    color: Colors.yellow,
                     fontWeight: FontWeight.w400,
                   ),
                 ),

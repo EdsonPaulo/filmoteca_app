@@ -1,7 +1,7 @@
 import 'package:filmoteca_app/models/movie_model.dart';
-import 'package:filmoteca_app/screens/movie_details/comment_tab/comment_tab.dart';
-import 'package:filmoteca_app/screens/movie_details/media_tab/media_tab.dart';
-import 'package:filmoteca_app/screens/movie_details/suggestions_tab/suggestions_tab.dart';
+import 'package:filmoteca_app/screens/movie_details/reviews/reviews_tab.dart';
+import 'package:filmoteca_app/screens/movie_details/media/media_tab.dart';
+import 'package:filmoteca_app/screens/movie_details/suggestions/suggestions_tab.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +57,7 @@ class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
       case 0:
         return MediaTab(movieId: widget.movie.id);
       case 1:
-        return CommentTab(movieId: widget.movie.id);
+        return ReviewsTab(movieId: widget.movie.id);
       case 2:
         return SuggestionsTab(movieId: widget.movie.id);
       default:
@@ -80,7 +80,7 @@ class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _buildTab('Vídeos', 0),
-                _buildTab('Comentários', 1),
+                _buildTab('Avaliações', 1),
                 _buildTab('Sugestões', 2),
               ],
             ),
