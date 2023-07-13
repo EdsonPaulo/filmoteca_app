@@ -13,7 +13,7 @@ Future<List<MovieModel>> getFavorites() async {
     String? accessToken = prefs.getString(SharedPreferencesKeys.accessToken);
 
     final response = await http.get(
-      Uri.parse('$apiUrl/favorites'),
+      Uri.parse('$apiUrl/favorites/'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken'
@@ -42,7 +42,7 @@ Future<void> postFavorite({required int movieId}) async {
     String? accessToken = prefs.getString(SharedPreferencesKeys.accessToken);
 
     await http.post(
-      Uri.parse('$apiUrl/favorites'),
+      Uri.parse('$apiUrl/favorites/'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken'
@@ -62,7 +62,7 @@ Future<void> deleteFavorite({required int movieId}) async {
     String? accessToken = prefs.getString(SharedPreferencesKeys.accessToken);
 
     await http.delete(
-      Uri.parse('$apiUrl/favorites/$movieId'),
+      Uri.parse('$apiUrl/favorites/$movieId/'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken'

@@ -10,7 +10,7 @@ Future<UserModel?> postSignIn({
   required String password,
 }) async {
   try {
-    final response = await http.post(Uri.parse('$apiUrl/auth/sign_in'),
+    final response = await http.post(Uri.parse('$apiUrl/auth/sign_in/'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'email': email,
@@ -39,7 +39,7 @@ Future<UserModel?> postSignUp({
   required String password,
 }) async {
   try {
-    final response = await http.post(Uri.parse('$apiUrl/auth/sign_up'),
+    final response = await http.post(Uri.parse('$apiUrl/auth/sign_up/'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'name': name,

@@ -9,7 +9,7 @@ const String apiUrl = 'https://filmoteca.onrender.com';
 
 Future<List<ReviewModel>> fetchMovieReviews({required int movieId}) async {
   try {
-    final response = await http.get(Uri.parse('$apiUrl/reviews/$movieId'));
+    final response = await http.get(Uri.parse('$apiUrl/reviews/$movieId/'));
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       List<dynamic>? decodedResponse = jsonDecode(response.body)['data'];
@@ -62,7 +62,7 @@ void deleteReview({required int reviewId}) async {
     String? accessToken = prefs.getString(SharedPreferencesKeys.accessToken);
 
     await http.delete(
-      Uri.parse('$apiUrl/reviews/$reviewId'),
+      Uri.parse('$apiUrl/reviews/$reviewId/'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken'
