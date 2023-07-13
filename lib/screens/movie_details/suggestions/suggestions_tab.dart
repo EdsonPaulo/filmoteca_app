@@ -5,9 +5,9 @@ import 'package:filmoteca_app/shared/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
 
 class SuggestionsTab extends StatefulWidget {
-  final MovieModel movie;
+  final int movieId;
 
-  const SuggestionsTab({super.key, required this.movie});
+  const SuggestionsTab({super.key, required this.movieId});
 
   @override
   _SuggestionsTab createState() => _SuggestionsTab();
@@ -15,16 +15,12 @@ class SuggestionsTab extends StatefulWidget {
 
 class _SuggestionsTab extends State<SuggestionsTab> {
   late Future<List<MovieModel>> _moviesFuture;
-  final String _selectedSortBy = 'popularity.desc';
 
   @override
   void initState() {
     super.initState();
     setState(() {
-      _moviesFuture = fetchMoviesByCategoryId(
-        categoryId: widget.movie.categories[0],
-        sortBy: _selectedSortBy,
-      );
+      _moviesFuture = fetchMovieRecommendations(widget.movieId);
     });
   }
 

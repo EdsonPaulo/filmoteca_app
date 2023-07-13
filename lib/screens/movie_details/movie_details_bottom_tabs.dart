@@ -59,7 +59,7 @@ class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
       case 1:
         return ReviewsTab(movieId: widget.movie.id);
       case 2:
-        return SuggestionsTab(movie: widget.movie);
+        return SuggestionsTab(movieId: widget.movie.id);
       default:
         return Container();
     }
