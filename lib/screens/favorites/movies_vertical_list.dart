@@ -30,7 +30,8 @@ class MoviesVerticalList extends StatelessWidget {
             child: FavoriteCard(
               movie: favoriteMovies[index],
               height: 135,
-              onRemove: () => favoritesBloc.removeFromFavorites(favoriteMovies[index]),
+              onRemove: () =>
+                  favoritesBloc.removeFromFavorites(favoriteMovies[index]),
             ),
           )),
     );

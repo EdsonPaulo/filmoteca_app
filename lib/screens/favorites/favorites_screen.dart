@@ -17,6 +17,11 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   FavoritesBloc favoritesBloc = GetIt.instance<FavoritesBloc>();
 
+  Future<void> handleRefresh() async {
+    favoritesBloc.fetchDataFromApi();
+    return;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,37 +44,41 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               ),
             ),
             Expanded(
-              child: StreamBuilder<List<MovieModel>>(
-                stream: favoritesBloc.favorites,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<MovieModel> movies = snapshot.data!;
-                    if (movies.isEmpty) {
-                      return const Center(
-                        child: Text(
-                          'A tua lista de favoritos está vazia!',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 18,
+              child: RefreshIndicator(
+                onRefresh:
+                    handleRefresh, // Sua função de tratamento de atualização
+                child: StreamBuilder<List<MovieModel>>(
+                  stream: favoritesBloc.favorites,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<MovieModel> movies = snapshot.data!;
+                      if (movies.isEmpty) {
+                        return const Center(
+                          child: Text(
+                            'A tua lista de favoritos está vazia!',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 18,
+                            ),
                           ),
+                        );
+                      }
+                      return MoviesVerticalList(favoriteMovies: movies);
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text(
+                          'Ocorreu um erro no carregamento: \n${snapshot.error}',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: Colors.redAccent, fontSize: 16),
                         ),
                       );
                     }
-                    return MoviesVerticalList(favoriteMovies: movies);
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text(
-                        'Ocorreu um erro no carregamento: \n${snapshot.error}',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            color: Colors.redAccent, fontSize: 16),
-                      ),
-                    );
-                  }
-                  return const Center(child: CircularProgressIndicator());
-                },
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),
