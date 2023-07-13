@@ -61,20 +61,13 @@ void deleteReview({required int reviewId}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? accessToken = prefs.getString(SharedPreferencesKeys.accessToken);
 
-    final response = await http.delete(
+    await http.delete(
       Uri.parse('$apiUrl/reviews/$reviewId'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken'
       },
     );
-
-    if (response.statusCode != 200 &&
-        response.statusCode != 201 &&
-        response.statusCode != 204) {
-      throw http.ClientException(
-          jsonDecode(response.body)['message'] ?? 'Ocorreu um erro!');
-    }
   } on http.ClientException catch (e) {
     throw Exception(e.message);
   } catch (e) {

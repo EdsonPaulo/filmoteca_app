@@ -1,4 +1,6 @@
 /// USER REVIEW
+// ignore_for_file: prefer_null_aware_operators
+
 class ReviewModel {
   int id;
   int movieId;
@@ -69,7 +71,6 @@ class MovieModel {
   String synopsis;
   String coverImgUrl;
   String posterImgUrl;
-  bool liked; // if the current user liked this movie
   String releaseDate;
   String homepage;
   List<String> images;
@@ -86,7 +87,6 @@ class MovieModel {
     required this.synopsis,
     this.duration = 0,
     this.rating = 0.0,
-    this.liked = false,
     this.images = const [],
     this.cast = const [],
     this.categories = const [],

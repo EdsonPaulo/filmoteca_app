@@ -15,11 +15,10 @@ class FavoritesBloc {
   void fetchDataFromApi() async {
     try {
       List<MovieModel> apiData = await getFavorites();
-      print('fetchDataFromApi: $apiData');
       _favoriteList = apiData;
+      _favoritesController.add(List<MovieModel>.from(_favoriteList));
     } catch (e) {
       _favoriteList = [];
-      print('fetchDataFromApi error: $e');
     }
   }
 
@@ -57,11 +56,19 @@ class FavoritesBloc {
   }
 
   void postFavoritesFromApi(int movieId) async {
-    postFavorite(movieId: movieId);
+    try {
+      await postFavorite(movieId: movieId);
+    } catch (e) {
+      print(e);
+    }
   }
 
   void deleteFavoriteFromApi(int movieId) async {
-    deleteFavorite(movieId: movieId);
+    try {
+      await deleteFavorite(movieId: movieId);
+    } catch (e) {
+      print(e);
+    }
   }
 
   void dispose() {

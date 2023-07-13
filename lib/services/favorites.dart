@@ -22,15 +22,12 @@ Future<List<MovieModel>> getFavorites() async {
 
     List<dynamic> decodedResponse = jsonDecode(response.body)['data'];
 
-    print('getFavorites response $decodedResponse');
-
     if (response.statusCode == 200 || response.statusCode == 201) {
       return decodedResponse
           .map((item) => MovieModel.fromJson(item['movie_data']))
           .toList();
     } else {
-      throw http.ClientException(
-          decodedResponse[0] ?? 'Ocorreu um erro!');
+      throw http.ClientException(decodedResponse[0] ?? 'Ocorreu um erro!');
     }
   } on http.ClientException catch (e) {
     throw Exception(e.message);
@@ -39,12 +36,12 @@ Future<List<MovieModel>> getFavorites() async {
   }
 }
 
-void postFavorite({required int movieId}) async {
+Future<void> postFavorite({required int movieId}) async {
   try {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? accessToken = prefs.getString(SharedPreferencesKeys.accessToken);
 
-    final response = await http.post(
+    await http.post(
       Uri.parse('$apiUrl/favorites'),
       headers: {
         'Content-Type': 'application/json',
@@ -52,13 +49,6 @@ void postFavorite({required int movieId}) async {
       },
       body: jsonEncode({'movie_id': movieId}),
     );
-
-    if (response.statusCode != 200 &&
-        response.statusCode != 201 &&
-        response.statusCode != 204) {
-      throw http.ClientException(
-          jsonDecode(response.body)['message'] ?? 'Ocorreu um erro!');
-    }
   } on http.ClientException catch (e) {
     throw Exception(e.message);
   } catch (e) {
@@ -66,25 +56,18 @@ void postFavorite({required int movieId}) async {
   }
 }
 
-void deleteFavorite({required int movieId}) async {
+Future<void> deleteFavorite({required int movieId}) async {
   try {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? accessToken = prefs.getString(SharedPreferencesKeys.accessToken);
 
-    final response = await http.delete(
+    await http.delete(
       Uri.parse('$apiUrl/favorites/$movieId'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken'
       },
     );
-
-    if (response.statusCode != 200 &&
-        response.statusCode != 201 &&
-        response.statusCode != 204) {
-      throw http.ClientException(
-          jsonDecode(response.body)['message'] ?? 'Ocorreu um erro!');
-    }
   } on http.ClientException catch (e) {
     throw Exception(e.message);
   } catch (e) {
