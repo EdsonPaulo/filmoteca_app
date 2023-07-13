@@ -2,7 +2,6 @@ import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/screens/movie_details/reviews/reviews_tab.dart';
 import 'package:filmoteca_app/screens/movie_details/media/media_tab.dart';
 import 'package:filmoteca_app/screens/movie_details/suggestions/suggestions_tab.dart';
-import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +16,10 @@ class MovieDetailsTabs extends StatefulWidget {
 
 class _MovieDetailsTabsState extends State<MovieDetailsTabs> {
   int _selectedIndex = 0;
-  late Future<MovieModel> _movieFuture;
 
   @override
   void initState() {
     super.initState();
-    _movieFuture = fetchMovieById(widget.movie.id);
   }
 
   Widget _buildTab(String text, int index) {

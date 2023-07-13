@@ -1,4 +1,3 @@
-import 'package:filmoteca_app/models/category_model.dart';
 import 'package:filmoteca_app/models/movie_model.dart';
 import 'package:filmoteca_app/services/get_movies.dart';
 import 'package:filmoteca_app/shared/widgets/movie_card.dart';
@@ -26,9 +25,8 @@ class _SuggestionsTab extends State<SuggestionsTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 400,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
